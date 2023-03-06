@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-03-06T06:39:18.985Z</updated>
+  <updated>2023-03-06T06:40:37.279Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://example.com/2023/03/06/plc/"/>
     <id>http://example.com/2023/03/06/plc/</id>
     <published>2023-03-06T06:22:56.004Z</published>
-    <updated>2023-03-06T06:39:18.985Z</updated>
+    <updated>2023-03-06T06:40:37.279Z</updated>
     
     <content type="html"><![CDATA[<p>本博客收录了三菱FX系列的一些手册，以便随时随地查阅。</p><span id="more"></span><div class="row">    <embed src="/pdf/FX2n中文指令编程手册.pdf" width="100%" height="550" type="application/pdf"></div><div class="row">    <embed src="/pdf/FX入门篇.pdf" width="100%" height="550" type="application/pdf"></div><div class="row">    <embed src="/pdf/FX软元件.pdf" width="100%" height="550" type="application/pdf"></div><div class="row">    <embed src="/pdf/ST结构文本Q.pdf" width="100%" height="550" type="application/pdf"></div>]]></content>
     
