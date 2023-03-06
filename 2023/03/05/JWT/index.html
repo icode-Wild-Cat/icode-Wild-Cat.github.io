@@ -201,7 +201,17 @@
 
 <p>最终存放的数据在JWT内部的实体claims里，它是存放数据的地方。</p>
 <h2 id="JJWT"><a href="#JJWT" class="headerlink" title="JJWT"></a>JJWT</h2><p>它是为了更友好在JVM上使用JWT，是基于JWT，JWS，JWE，JWK框架的java实现。</p>
-<p>参考：<a target="_blank" rel="noopener" href="https://github.io/jwtk/jwwt">github地址</a></p>
+<p>参考：<a target="_blank" rel="noopener" href="https://github.com/jwtk/jwwt">github地址</a></p>
+<p>依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.jsonwebtoken<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jjwt<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.7.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>新建JwtConstants类，用于token的chaims保存有效信息字段名</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">JwtConstants</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> finals <span class="type">String</span> <span class="variable">JWT_KEY_USER_ID</span> <span class="operator">=</span> <span class="string">&quot;uid&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>新建JwtInfo类，用于token的chaims保存有效信息</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">JwtInfo</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String uid;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">JwtInfo</span><span class="params">(String uid)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.uid = uid;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getUid</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> uid;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setUid</span><span class="params">(String uid)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.uid = uid;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>新建JwtTokenUtils工具类，用于token的生成和解析</p>
 
         
     </section>
@@ -235,6 +245,8 @@
 
         
             
+            
+            <a id="pageprev" href="/2023/03/06/plc/" class="article-prev" title="fx2n中文指令编程手册"><i class="icon-arrow-left"></i></a>
             
         
 
