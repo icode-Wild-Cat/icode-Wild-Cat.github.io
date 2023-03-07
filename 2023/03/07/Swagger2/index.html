@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+
+    
+
+    
+
+    <title>Swagger2 | DodgeWildCat&#39;s Blog</title>
+    <meta name="author" content="John Doe" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="Swagger 是一个规范和完整的框架，用于生成、描述、调用和可视化 RESTful 风格的 Web 服务的接口文档。目前的项目基本都是前后端分离，后端为前端提供接口的同时，还需同时提供接口的说明文档。但我们的代码总是会根据实际情况来实时更新，这个时候有可能会忘记更新接口的说明文档，造成一些不必要的问题。用人话说，swagger就是帮你写接口说明文档的。参考博客能干什么？1.前后端分离的项目前后端分离式开发在这里插入图片描述:纯粹后端的java开发人员,不编写页面代码, 只需要写接口( 这里的接" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+
+    
+    <link rel="alternate" href="/atom.xml" title="DodgeWildCat&#39;s Blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/images/favicon.ico">
+    
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'icomoon';
+        src: url("/fonts/icomoon.eot?q628ml");
+        src: url("/fonts/icomoon.eot?q628ml#iefix") format('embedded-opentype'),
+             url("/fonts/icomoon.ttf?q628ml") format('truetype'),
+             url("/fonts/icomoon.woff?q628ml") format('woff'),
+             url("/fonts/icomoon.svg?q628ml#icomoon") format('svg');
+        font-weight: normal;
+        font-style: normal;
+    }
+    </style>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!--[if lt IE 9]><style type="text/css">.nav-inner {top:0;}.author-meta {position:static;top:0;}.search-form {height:36px;}</style><script type="text/javascript" src="https://unpkg.com/html5shiv@3.7.3/dist/html5shiv.min.js"></script><![endif]-->
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+
+    <main class="app">
+        <header id="header" class="header clearfix">
+    <div id="nav" class="nav">
+    <div class="nav-mobile">
+        <button id="open-panel" class="open-panel nav-mobile-item"><i class="icon-documents"></i></button>
+        <h1 class="nav-mobile-title nav-mobile-item">DodgeWildCat&#39;s Blog</h1>
+        <button id="open-menus" class="open-panel nav-mobile-item"><i class="icon-library"></i></button>
+    </div>
+
+    <nav id="nav-inner" class="nav-inner">
+        
+            <a class="nav-item" href="/">
+                <span class="nav-text">首页</span>
+            </a>
+        
+            <a class="nav-item" href="/tags">
+                <span class="nav-text">标签</span>
+            </a>
+        
+            <a class="nav-item" href="/archives">
+                <span class="nav-text">归档</span>
+            </a>
+        
+            <a class="nav-item" href="/atom.xml">
+                <span class="nav-text">订阅</span>
+            </a>
+        
+            <a class="nav-item" href="/about">
+                <span class="nav-text">关于</span>
+            </a>
+        
+    </nav>
+</div>
+
+    <aside id="aside" class="aside">
+    <div id="aside-mask" class="aside-mask"></div>
+    <div id="aside-inner" class="aside-inner">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"><i class="icon-search-stroke"></i></button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+
+        
+        
+        
+        
+
+        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%BD%E5%B9%B2%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">能干什么？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E7%9A%84%E9%A1%B9%E7%9B%AE"><span class="toc-number">1.1.</span> <span class="toc-text">1.前后端分离的项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%BB%80%E4%B9%88%E6%98%AF%E6%8E%A5%E5%8F%A3"><span class="toc-number">1.2.</span> <span class="toc-text">2.什么是接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%B8%BE%E4%BE%8B%E8%AF%B4%E6%98%8E"><span class="toc-number">1.3.</span> <span class="toc-text">3.举例说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E8%BF%94%E5%9B%9EJSON%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.4.</span> <span class="toc-text">4.返回JSON格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Swagger2%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">Swagger2的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%BE%9D%E8%B5%96"><span class="toc-number">2.1.</span> <span class="toc-text">1.依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%8A%A0%E5%85%A5%E9%85%8D%E7%BD%AE%E7%B1%BB"><span class="toc-number">2.2.</span> <span class="toc-text">2.加入配置类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%BC%80%E5%90%AFSwagger2"><span class="toc-number">2.3.</span> <span class="toc-text">3.开启Swagger2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8Swagger2%E7%9A%84%E6%B3%A8%E8%A7%A3"><span class="toc-number">3.</span> <span class="toc-text">使用Swagger2的注解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%BB%99%E6%8E%A7%E5%88%B6%E5%B1%82%E6%B7%BB%E5%8A%A0%E6%B3%A8%E9%87%8A"><span class="toc-number">3.1.</span> <span class="toc-text">1.给控制层添加注释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%BB%99%E6%8E%A7%E5%88%B6%E5%B1%82%E7%9A%84%E6%96%B9%E6%B3%95%E6%B7%BB%E5%8A%A0%E4%B8%AD%E6%96%87%E6%B3%A8%E9%87%8A"><span class="toc-number">3.2.</span> <span class="toc-text">2.给控制层的方法添加中文注释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E7%BB%99%E5%8F%82%E6%95%B0%E6%B3%A8%E9%87%8A"><span class="toc-number">3.3.</span> <span class="toc-text">3.给参数注释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E9%9A%90%E8%97%8F%E4%B8%80%E4%B8%AA%E5%8F%82%E6%95%B0%EF%BC%8C%E7%94%A8-ApiIgnore"><span class="toc-number">3.4.</span> <span class="toc-text">4.隐藏一个参数，用@ApiIgnore</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%B7%BB%E5%8A%A0%E5%AE%8C%E6%88%90"><span class="toc-number">3.5.</span> <span class="toc-text">5.添加完成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E7%BB%99%E7%B1%BB%E9%87%8C%E7%9A%84%E5%B1%9E%E6%80%A7%E6%B7%BB%E5%8A%A0%E6%B3%A8%E9%87%8A"><span class="toc-number">3.6.</span> <span class="toc-text">6.给类里的属性添加注释</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#6-1%E7%BB%99%E7%B1%BB%E5%8A%A0%E4%B8%80%E4%B8%AA%E6%B3%A8%E8%A7%A3"><span class="toc-number">3.6.1.</span> <span class="toc-text">6.1给类加一个注解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-2%E7%BB%99%E5%B1%9E%E6%80%A7%E6%B7%BB%E5%8A%A0%E6%B3%A8%E8%A7%A3"><span class="toc-number">3.6.2.</span> <span class="toc-text">6.2给属性添加注解</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RestFul%E9%A3%8E%E6%A0%BC"><span class="toc-number">4.</span> <span class="toc-text">RestFul风格</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#0-RestFul%E6%98%AF%E4%B8%80%E7%A7%8D"><span class="toc-number">4.1.</span> <span class="toc-text">0.RestFul是一种</span></a></li></ol></li></ol>
+        
+    </div>
+</aside>
+
+</header>
+
+        <div id="content" class="content">
+            <div id="wrapper" class="wrapper" style="max-width: 800px">
+                <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            Swagger2
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <a class="article-date" href="http://example.com/2023/03/07/Swagger2/index.html">
+    
+    <i class="icon-calendar vm"></i>
+    
+    <time class="vm" datetime="2023-03-07T05:41:17.597Z" itemprop="datePublished">2023-03-07</time>
+</a>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/Web/" rel="tag">Web</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <p>Swagger 是一个规范和完整的框架，用于生成、描述、调用和可视化 RESTful 风格的 Web 服务的接口文档。</p>
+<p>目前的项目基本都是前后端分离，后端为前端提供接口的同时，还需同时提供接口的说明文档。但我们的代码总是会根据实际情况来实时更新，这个时候有可能会忘记更新接口的说明文档，造成一些不必要的问题。</p>
+<p>用人话说，swagger就是帮你写接口说明文档的。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/yuanchun05/article/details/127114008">参考博客</a></p>
+<span id="more"></span>
+
+<h2 id="能干什么？"><a href="#能干什么？" class="headerlink" title="能干什么？"></a>能干什么？</h2><h3 id="1-前后端分离的项目"><a href="#1-前后端分离的项目" class="headerlink" title="1.前后端分离的项目"></a>1.前后端分离的项目</h3><p>前后端分离式开发<br>在这里插入图片描述:<br><img src="/images/c47123560c614b23bd5707bf42b689e3.png" alt="c47123560c614b23bd5707bf42b689e3.png"><br>纯粹后端的java开发人员,不编写页面代码, 只需要写接口( 这里的接口不是java中的interface )<br>在SpringMVC的控制层Controller类的方法里, 不写转页( 包括 内部转, 重定向 ),<br>都是通过 @ResponseBody, 返回JSON格式的数据<br>所以 Controller 类上的注解由@Controller, 改为 @RestController ( @Controller + @ResponseBody )</p>
+<h3 id="2-什么是接口"><a href="#2-什么是接口" class="headerlink" title="2.什么是接口"></a>2.什么是接口</h3><p>接口就是制定一个协议, 给前端开发人员调用后端功能的参考. 可能包括的内容 :</p>
+<table>
+<thead>
+<tr>
+<th>协议</th>
+<th>介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>http 还是 https</td>
+<td>https请求需要SSL证书</td>
+</tr>
+<tr>
+<td>请求名</td>
+<td>url 或者 uri</td>
+</tr>
+<tr>
+<td>请求方式</td>
+<td>get, post, put, delete等等</td>
+</tr>
+<tr>
+<td>参数列表</td>
+<td>包括类型和传值方式</td>
+</tr>
+<tr>
+<td>返回类型</td>
+<td>返回格式, 状态码, 错误消息, 数据</td>
+</tr>
+</tbody></table>
+<h3 id="3-举例说明"><a href="#3-举例说明" class="headerlink" title="3.举例说明"></a>3.举例说明</h3><p>例如:</p>
+<p>模块名称: 用户登录</p>
+<p>请求方式: post</p>
+<p>请求名: &#x2F;login&#x2F;auth</p>
+<p>参数</p>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>说明</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>username</td>
+<td>String(20)</td>
+<td>用户名</td>
+<td>是</td>
+</tr>
+<tr>
+<td>password</td>
+<td>String(20)</td>
+<td>密码</td>
+<td>是</td>
+</tr>
+<tr>
+<td>remember</td>
+<td>Interger</td>
+<td>记住我, 1-记住,0-不记住, 默认按0处理</td>
+<td>否</td>
+</tr>
+</tbody></table>
+<p>返回:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    code<span class="punctuation">:</span> <span class="number">200</span><span class="punctuation">,</span></span><br><span class="line">    msg<span class="punctuation">:</span> &#x27;success&#x27;<span class="punctuation">,</span></span><br><span class="line">    data<span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        userId<span class="punctuation">:</span> <span class="number">1</span><span class="punctuation">,</span></span><br><span class="line">        userName<span class="punctuation">:</span> 王小二<span class="punctuation">,</span></span><br><span class="line">        sex<span class="punctuation">:</span> <span class="number">1</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>或者:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    code<span class="punctuation">:</span> <span class="number">1001</span><span class="punctuation">,</span></span><br><span class="line">    msg<span class="punctuation">:</span> &#x27;用户名不能为空&#x27;<span class="punctuation">,</span></span><br><span class="line">    data<span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>如果是由后端人员来维护这些信息, 有个非常大的缺点, </p>
+<p>就是如果对这个方法做了修改, 例如添加了一个新的参数, 则需要修改这个接口文档.</p>
+<p>基于这个缺点, 诞生了一个技术, 接口文档自动生成工具-swagger</p>
+<p>即, 整个接口文档内容, 不需要手动编写了, 而是通过程序自动生成</p>
+<h3 id="4-返回JSON格式"><a href="#4-返回JSON格式" class="headerlink" title="4.返回JSON格式"></a>4.返回JSON格式</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.alibaba.fastjson.JSON;</span><br><span class="line"><span class="keyword">import</span> com.alibaba.fastjson.TypeReference;</span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Result</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Integer code; <span class="comment">// 数字代码 如: 成功 200;</span></span><br><span class="line">    <span class="keyword">private</span> String msg; <span class="comment">// &quot;错误描述&quot;</span></span><br><span class="line">    <span class="keyword">private</span> Object data; <span class="comment">// 数据 &#123;&#125;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Result</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.code = <span class="number">200</span>;</span><br><span class="line">        <span class="built_in">this</span>.msg = <span class="string">&quot;success&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Result <span class="title function_">error</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> error(<span class="number">500</span>, <span class="string">&quot;未知异常，请联系管理员&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Result <span class="title function_">error</span><span class="params">(String msg)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> error(<span class="number">500</span>, msg);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Result <span class="title function_">error</span><span class="params">(<span class="type">int</span> code, String msg)</span> &#123;</span><br><span class="line">        <span class="type">Result</span> <span class="variable">r</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Result</span>();</span><br><span class="line">        r.code = code;</span><br><span class="line">        r.msg = msg;</span><br><span class="line">        <span class="keyword">return</span> r;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Result <span class="title function_">ok</span><span class="params">(String msg)</span> &#123;</span><br><span class="line">        <span class="type">Result</span> <span class="variable">r</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Result</span>();</span><br><span class="line">        r.msg = msg;</span><br><span class="line">        <span class="keyword">return</span> r;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Result <span class="title function_">ok</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Result</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Result <span class="title function_">data</span><span class="params">(Object data)</span> &#123;</span><br><span class="line">        <span class="type">Result</span> <span class="variable">r</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Result</span>();</span><br><span class="line">        r.data = data;</span><br><span class="line">        <span class="keyword">return</span> r;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 把map里key为data的数据转换成某个类型的数据</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> typeReference</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &lt;T&gt;</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> &lt;T&gt; T <span class="title function_">getData</span><span class="params">(TypeReference&lt;T&gt; typeReference)</span> &#123;</span><br><span class="line">        <span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="built_in">this</span>.getData();</span><br><span class="line"></span><br><span class="line">        <span class="type">String</span> <span class="variable">json</span> <span class="operator">=</span> JSON.toJSONString(obj);</span><br><span class="line"></span><br><span class="line">        <span class="type">T</span> <span class="variable">t</span> <span class="operator">=</span> JSON.parseObject(json, typeReference);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> t;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> &lt;T&gt; T <span class="title function_">getData</span><span class="params">(String key, TypeReference&lt;T&gt; typeReference)</span> &#123;</span><br><span class="line">        <span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="built_in">this</span>.getData();</span><br><span class="line"></span><br><span class="line">        <span class="type">String</span> <span class="variable">json</span> <span class="operator">=</span> JSON.toJSONString(obj);</span><br><span class="line"></span><br><span class="line">        <span class="type">T</span> <span class="variable">t</span> <span class="operator">=</span> JSON.parseObject(json, typeReference);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> t;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最少包含三个属性，可以很多</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    code<span class="punctuation">:</span> <span class="number">200</span><span class="punctuation">,</span><span class="comment">//数字代码</span></span><br><span class="line">    msg<span class="punctuation">:</span> <span class="comment">//错误描述,</span></span><br><span class="line">    data<span class="punctuation">:</span> <span class="punctuation">&#123;</span><span class="punctuation">&#125;</span><span class="comment">//数据</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Swagger2的使用"><a href="#Swagger2的使用" class="headerlink" title="Swagger2的使用"></a>Swagger2的使用</h2><h3 id="1-依赖"><a href="#1-依赖" class="headerlink" title="1.依赖"></a>1.依赖</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger2<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.9.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger-ui<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.9.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.swagger<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>swagger-annotations<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.swagger<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>swagger-models<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.swagger<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>swagger-annotations<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.5.21<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.swagger<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>swagger-models<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.5.21<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-加入配置类"><a href="#2-加入配置类" class="headerlink" title="2.加入配置类"></a>2.加入配置类</h3><p>主要配置Swagger2注解的扫描路径</p>
+<p>次要配置一些说明信息</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> springfox.documentation.builders.ApiInfoBuilder;</span><br><span class="line"><span class="keyword">import</span> springfox.documentation.builders.PathSelectors;</span><br><span class="line"><span class="keyword">import</span> springfox.documentation.builders.RequestHandlerSelectors;</span><br><span class="line"><span class="keyword">import</span> springfox.documentation.service.ApiInfo;</span><br><span class="line"><span class="keyword">import</span> springfox.documentation.spi.DocumentationType;</span><br><span class="line"><span class="keyword">import</span> springfox.documentation.spring.web.plugins.Docket;</span><br><span class="line"><span class="keyword">import</span> springfox.documentation.swagger2.annotations.EnableSwagger2;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableSwagger2</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Swagger2Config</span> &#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Docket <span class="title function_">createRestApi</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Docket</span>(DocumentationType.SWAGGER_2)</span><br><span class="line">                .apiInfo(apiInfo())</span><br><span class="line">                .select()</span><br><span class="line">                .apis(RequestHandlerSelectors.basePackage(<span class="string">&quot;com.yuan&quot;</span>))    <span class="comment">//这个是重点</span></span><br><span class="line">                .paths(PathSelectors.any())</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> ApiInfo <span class="title function_">apiInfo</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ApiInfoBuilder</span>()</span><br><span class="line">                .title(<span class="string">&quot;接口文档标题&quot;</span>)</span><br><span class="line">                .description(<span class="string">&quot;文档内容描述&quot;</span>)</span><br><span class="line">                .termsOfServiceUrl(<span class="string">&quot;http://www.baidu.com&quot;</span>)</span><br><span class="line">                .version(<span class="string">&quot;1.0&quot;</span>)</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apis(RequestHandlerSelectors.basePackage(<span class="string">&quot;com.....&quot;</span>))</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-开启Swagger2"><a href="#3-开启Swagger2" class="headerlink" title="3.开启Swagger2"></a>3.开启Swagger2</h3><p>在配置类上添加 @EnableSwagger2 注解 </p>
+<h2 id="使用Swagger2的注解"><a href="#使用Swagger2的注解" class="headerlink" title="使用Swagger2的注解"></a>使用Swagger2的注解</h2><p>api 注解</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Api</span>，				 用于类，标识这个类是Swagger的资源类</span><br><span class="line"><span class="meta">@ApiIgnore</span>，			 用于类，忽略该Controller，指不对当前类做扫描</span><br><span class="line"><span class="meta">@ApiOperation</span>，		 用于方法，描述Controller类中的method接口</span><br><span class="line"><span class="meta">@ApiParam</span>，			 用于参数，单个参数描述，与<span class="meta">@ApiImplicitParam</span>不同的是，它是写在参数左侧,<span class="meta">@ApiParam(name=&quot;username&quot;,value=&quot;用户名&quot;)</span>String username</span><br><span class="line"><span class="meta">@ApiModel</span>,			  用于类，标识对类进行说明，用于参数用实体类接收</span><br><span class="line"><span class="meta">@ApiProperty</span>：        用于方法，字段，表示对model属性的说明或者数据操作更改</span><br><span class="line"><span class="meta">@ApiModelProperty</span></span><br><span class="line"><span class="meta">@ApiImplicitParam</span>：   *用于方法，表示单独的请求参数</span><br><span class="line"><span class="meta">@ApiImplicitParams</span>：  *用于方法，包含多个 <span class="meta">@ApiImplicitParam</span></span><br><span class="line"><span class="meta">@ApiResponse</span>：        用于方法，描述单个出参信息</span><br><span class="line"><span class="meta">@ApiResponses</span>：       用于方法，包含多个<span class="meta">@ApiResponse</span></span><br><span class="line"><span class="meta">@ApiError</span>：           用于方法，接口错误所返回的信息</span><br></pre></td></tr></table></figure>
+
+<p>swagger不会参与业务开发，和业务代码是完全解耦的，没有任何耦合</p>
+<p>原始代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LoginController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@PostMapping(value = &quot;/user/login1&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Result <span class="title function_">login1</span><span class="params">(String userName, String password)</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;userName = &quot;</span> + userName);</span><br><span class="line">        System.out.println(<span class="string">&quot;password = &quot;</span> + password);</span><br><span class="line">        <span class="keyword">return</span> Result.ok();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>swagger的注解只是给你的类，方法，参数，属性添加注解而已</p>
+<h3 id="1-给控制层添加注释"><a href="#1-给控制层添加注释" class="headerlink" title="1.给控制层添加注释"></a>1.给控制层添加注释</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Api(tags=&quot;用户管理&quot;)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-给控制层的方法添加中文注释"><a href="#2-给控制层的方法添加中文注释" class="headerlink" title="2.给控制层的方法添加中文注释"></a>2.给控制层的方法添加中文注释</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ApiOpeeration(value = &quot;方法名称&quot;,tags = &quot;分组标记-与 @Api的tags属性对应&quot;,notes = &quot;方法说明&quot;)</span></span><br><span class="line"><span class="meta">@ApiOperation(&quot;用户登录1&quot;)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-给参数注释"><a href="#3-给参数注释" class="headerlink" title="3.给参数注释"></a>3.给参数注释</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ApiImplicitParams(&#123;</span></span><br><span class="line"><span class="meta">       @ApiImplicitParam(name = &quot;userName&quot;, value = &quot;账号&quot;, required = true)</span></span><br><span class="line"><span class="meta">&#125;)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-隐藏一个参数，用-ApiIgnore"><a href="#4-隐藏一个参数，用-ApiIgnore" class="headerlink" title="4.隐藏一个参数，用@ApiIgnore"></a>4.隐藏一个参数，用@ApiIgnore</h3><h3 id="5-添加完成"><a href="#5-添加完成" class="headerlink" title="5.添加完成"></a>5.添加完成</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@Api(tags = &quot;用户管理&quot; )</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LoginController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiOperation(&quot;用户登录1&quot;)</span></span><br><span class="line">    <span class="meta">@ApiImplicitParams(&#123;</span></span><br><span class="line"><span class="meta">            @ApiImplicitParam(name = &quot;userName&quot;, value = &quot;账号&quot;, required = true)</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="meta">@PostMapping(value = &quot;/user/login1&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Result <span class="title function_">login1</span><span class="params">(String userName, <span class="meta">@ApiIgnore</span> String password)</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;userName = &quot;</span> + userName);</span><br><span class="line">        System.out.println(<span class="string">&quot;password = &quot;</span> + password);</span><br><span class="line">        <span class="keyword">return</span> Result.ok();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiOperation(&quot;用户登录2&quot;)</span></span><br><span class="line">    <span class="meta">@PostMapping(value = &quot;/user/login2&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Result <span class="title function_">login2</span><span class="params">( <span class="meta">@ApiParam(name = &quot;userName&quot;, value = &quot;账号&quot;, required = true)</span> String userName</span></span><br><span class="line"><span class="params">            , <span class="meta">@ApiIgnore</span> String password)</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;userName = &quot;</span> + userName);</span><br><span class="line">        System.out.println(<span class="string">&quot;password = &quot;</span> + password);</span><br><span class="line">        <span class="keyword">return</span> Result.ok();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-给类里的属性添加注释"><a href="#6-给类里的属性添加注释" class="headerlink" title="6.给类里的属性添加注释"></a>6.给类里的属性添加注释</h3><h4 id="6-1给类加一个注解"><a href="#6-1给类加一个注解" class="headerlink" title="6.1给类加一个注解"></a>6.1给类加一个注解</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ApiModel</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SysUser</span> <span class="keyword">implements</span> <span class="title class_">Serializable</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-2给属性添加注解"><a href="#6-2给属性添加注解" class="headerlink" title="6.2给属性添加注解"></a>6.2给属性添加注解</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> io.swagger.annotations.ApiModelProperty;</span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"> </span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SysUser</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> Integer userId;</span><br><span class="line">    <span class="meta">@ApiModelProperty(hidden = true)</span>  <span class="comment">//隐藏属性</span></span><br><span class="line">    <span class="keyword">private</span> Integer userStatus;</span><br><span class="line">    <span class="meta">@ApiModelProperty(value = &quot;账号&quot;, required = true)</span>	<span class="comment">//设置参数注释</span></span><br><span class="line">    <span class="keyword">private</span> String userName;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="RestFul风格"><a href="#RestFul风格" class="headerlink" title="RestFul风格"></a>RestFul风格</h2><h3 id="0-RestFul是一种"><a href="#0-RestFul是一种" class="headerlink" title="0.RestFul是一种"></a>0.RestFul是一种</h3>
+        
+    </section>
+</article>
+
+
+
+<div class="comments">
+    <div id="comments"></div>
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+    new Gitalk({
+        clientID: "7fbe80427f54741e289f",
+        clientSecret: "f34ed5fd92e54c9000bd37ba951948cb939deff5",
+        repo: "icode-wild-cat.github.io",
+        owner: "sanonz",
+        admin: ["sanonz"],
+        id: "78a959f87bcc6324285947bc3485178f",
+        distractionFreeMode: true,
+        title: "Swagger2",
+        body: "http://example.com/2023/03/07/Swagger2/",
+        labels: ["Web"]
+    }).render('comments');
+    </script>
+</div>
+
+
+
+            </div>
+        </div>
+
+        
+            
+            <a id="pagenext" href="/2023/03/06/SpringSecurity/" class="article-next" title="SpringSecurity"><i class="icon-arrow-right"></i></a>
+            
+            
+        
+
+        <footer class="footer">
+    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, Theme by <a href="https://github.com/sanonz/hexo-theme-concise" target="_blank">Concise</a>
+
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?e4027971a230b210f4671f485b33846a";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    
+</footer>
+
+    </main>
+
+    <script type="text/javascript" src="https://unpkg.com/jquery@1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        var nodes = {
+            nav: $('#nav'),
+            aside: $('#aside'),
+            asideInner: $('#aside-inner'),
+            navInner: $('#nav-inner')
+        };
+
+        var doing = false;
+        nodes.asideInner.on('webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', function() {
+            if (nodes.aside.hasClass('mobile-open')) {
+                nodes.aside.removeClass('mobile-open');
+            } else {
+                nodes.aside.removeClass('mobile-close panel-show');
+            }
+            doing = false;
+        });
+        $('#open-panel, #aside-mask').on('click', function() {
+            if (doing) {
+                return;
+            }
+
+            if (nodes.aside.hasClass('panel-show')) {
+                nodes.aside.addClass('mobile-close');
+            } else {
+                nodes.aside.addClass('mobile-open panel-show');
+            }
+        });
+        $('#open-menus').on('click', function() {
+            nodes.navInner.slideToggle('normal', slideDone);
+        });
+
+        if (window.innerWidth <= 960) {
+            setTimeout(function() {
+                nodes.navInner.slideUp('normal', slideDone);
+            }, 3000);
+        }
+
+        function slideDone() {
+            if (nodes.navInner.css('display') !== 'none') {
+                nodes.navInner.css('display', '');
+            }
+        }
+
+        $(window).on('resize', function() {
+            if ($(this).width() > 960) {
+                nodes.navInner.css('display', '');
+            }
+        });
+    });
+    </script>
+    
+        
+<script src="/js/scrollspy.min.js"></script>
+
+        <script type="text/javascript">
+        $(document.body).scrollspy({target: '#aside-inner'});
+
+        $(window).on('resize', function() {
+            var hw = $('#header').width();
+            var ww = $('#wrapper').width();
+            var space = ($(this).width() - hw - ww) / 2 / 2;
+
+            var pageprev = $('#pageprev');
+            var pagenext = $('#pagenext');
+            var avg = (pageprev.width() + pagenext.width()) / 2
+
+            if(space > avg) {
+                var len = space - avg / 2;
+                var styles = {position: 'fixed', top: '50%', marginTop: - (pageprev.width() + pagenext.width()) / 4}
+                pageprev.css($.extend({left: hw + len}, styles));
+                pagenext.css($.extend({right: len}, styles));
+            } else {
+                pageprev.removeAttr('style');
+                pagenext.removeAttr('style');
+            }
+        }).trigger('resize');
+        </script>
+    
+
+</body>
+</html>
