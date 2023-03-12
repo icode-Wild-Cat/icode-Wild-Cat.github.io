@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+
+    
+
+    
+
+    <title>过滤器和拦截器 | DodgeWildCat&#39;s Blog</title>
+    <meta name="author" content="John Doe" />
+    <meta name="keywords" content="" />
+    <meta name="description" content=" 过滤器和拦截器在日常业务开发中不是经常用到，近来项目中偶尔遇到了，对过滤器和拦截器进行了一次系统学习，现总结如下。参考文章参考文章过滤器Filter0.提出问题我们在访问后台很多页面时都需要登录，只有登录的用户才能查看这些页面，我们需要在每次请求的时候都检查用户是否登陆，这样做很麻烦，有没有一种方法可以在我们请求之前就帮我们做这些事情。有！我们 web 应用经常会接收中文字符，由于可能导致中文乱码，我们每次都需要在方法的开始使用 request.setCharacterEncoding(“ut" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+
+    
+    <link rel="alternate" href="/atom.xml" title="DodgeWildCat&#39;s Blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/images/favicon.ico">
+    
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'icomoon';
+        src: url("/fonts/icomoon.eot?q628ml");
+        src: url("/fonts/icomoon.eot?q628ml#iefix") format('embedded-opentype'),
+             url("/fonts/icomoon.ttf?q628ml") format('truetype'),
+             url("/fonts/icomoon.woff?q628ml") format('woff'),
+             url("/fonts/icomoon.svg?q628ml#icomoon") format('svg');
+        font-weight: normal;
+        font-style: normal;
+    }
+    </style>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!--[if lt IE 9]><style type="text/css">.nav-inner {top:0;}.author-meta {position:static;top:0;}.search-form {height:36px;}</style><script type="text/javascript" src="https://unpkg.com/html5shiv@3.7.3/dist/html5shiv.min.js"></script><![endif]-->
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+
+    <main class="app">
+        <header id="header" class="header clearfix">
+    <div id="nav" class="nav">
+    <div class="nav-mobile">
+        <button id="open-panel" class="open-panel nav-mobile-item"><i class="icon-documents"></i></button>
+        <h1 class="nav-mobile-title nav-mobile-item">DodgeWildCat&#39;s Blog</h1>
+        <button id="open-menus" class="open-panel nav-mobile-item"><i class="icon-library"></i></button>
+    </div>
+
+    <nav id="nav-inner" class="nav-inner">
+        
+            <a class="nav-item" href="/">
+                <span class="nav-text">首页</span>
+            </a>
+        
+            <a class="nav-item" href="/categories/mech">
+                <span class="nav-text">机械</span>
+            </a>
+        
+            <a class="nav-item" href="/categories/srccode">
+                <span class="nav-text">源码系列</span>
+            </a>
+        
+            <a class="nav-item" href="/categories/back-end">
+                <span class="nav-text">后端</span>
+            </a>
+        
+            <a class="nav-item" href="/categories/front-end">
+                <span class="nav-text">前端</span>
+            </a>
+        
+            <a class="nav-item" href="/categories/ss">
+                <span class="nav-text">社科</span>
+            </a>
+        
+            <a class="nav-item" href="/categories/art">
+                <span class="nav-text">Art</span>
+            </a>
+        
+            <a class="nav-item" href="/categories/studymind">
+                <span class="nav-text">学习思想</span>
+            </a>
+        
+            <a class="nav-item" href="/tags">
+                <span class="nav-text">标签</span>
+            </a>
+        
+            <a class="nav-item" href="/archives">
+                <span class="nav-text">归档</span>
+            </a>
+        
+            <a class="nav-item" href="/atom.xml">
+                <span class="nav-text">订阅</span>
+            </a>
+        
+            <a class="nav-item" href="/about">
+                <span class="nav-text">关于</span>
+            </a>
+        
+    </nav>
+</div>
+
+    <aside id="aside" class="aside">
+    <div id="aside-mask" class="aside-mask"></div>
+    <div id="aside-inner" class="aside-inner">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"><i class="icon-search-stroke"></i></button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+
+        
+        
+        
+        
+
+        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%87%E6%BB%A4%E5%99%A8Filter"><span class="toc-number">1.</span> <span class="toc-text">过滤器Filter</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#0-%E6%8F%90%E5%87%BA%E9%97%AE%E9%A2%98"><span class="toc-number">1.1.</span> <span class="toc-text">0.提出问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1%E4%BB%80%E4%B9%88%E6%98%AF%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="toc-number">1.2.</span> <span class="toc-text">1.1什么是过滤器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2%E8%BF%87%E6%BB%A4%E5%99%A8%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86"><span class="toc-number">1.3.</span> <span class="toc-text">1.2过滤器执行原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3Filter%E6%8E%A5%E5%8F%A3"><span class="toc-number">1.4.</span> <span class="toc-text">1.3Filter接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4%E5%A6%82%E4%BD%95%E5%BC%80%E5%8F%91%E4%B8%80%E4%B8%AAFilter"><span class="toc-number">1.5.</span> <span class="toc-text">1.4如何开发一个Filter</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E5%AE%9E%E7%8E%B0Filter%E6%8E%A5%E5%8F%A3"><span class="toc-number">1.5.1.</span> <span class="toc-text">第一步：实现Filter接口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E9%85%8D%E7%BD%AEFilter"><span class="toc-number">1.5.2.</span> <span class="toc-text">第二步：配置Filter</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%A7%8D%EF%BC%9A%E5%9C%A8web-xml%E9%85%8D%E7%BD%AE"><span class="toc-number">1.5.2.1.</span> <span class="toc-text">第一种：在web.xml配置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%A7%8D%EF%BC%9A%E6%B3%A8%E8%A7%A3%E9%85%8D%E7%BD%AE%EF%BC%8C%E8%BF%99%E7%A7%8D%E6%AF%94%E8%BE%83%E7%AE%80%E5%8D%95%EF%BC%8C%E5%AE%9A%E4%B9%89filter%E4%B8%8A%E7%9A%84%E6%B3%A8%E8%A7%A3"><span class="toc-number">1.5.2.2.</span> <span class="toc-text">第二种：注解配置，这种比较简单，定义filter上的注解</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E7%A7%8D%EF%BC%9A%E5%88%A9%E7%94%A8%E9%85%8D%E7%BD%AE%E7%B1%BB%EF%BC%8C%E7%9B%B8%E5%85%B3%E4%BB%A3%E7%A0%81%E5%A6%82%E4%B8%8B"><span class="toc-number">1.5.2.3.</span> <span class="toc-text">第三种：利用配置类，相关代码如下</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%89%E7%A7%8Dfilter%E9%85%8D%E7%BD%AE%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-number">1.5.2.4.</span> <span class="toc-text">三种filter配置的优缺点</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8B%A6%E6%88%AA%E5%99%A8Interceptor"><span class="toc-number">2.</span> <span class="toc-text">拦截器Interceptor</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%8B%A6%E6%88%AA%E5%99%A8"><span class="toc-number">2.1.</span> <span class="toc-text">什么是拦截器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%A6%E6%88%AA%E5%99%A8%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">2.2.</span> <span class="toc-text">拦截器工作原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%A6%E6%88%AA%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E6%99%AF"><span class="toc-number">2.3.</span> <span class="toc-text">拦截器的使用情景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%A6%E6%88%AA%E5%99%A8%E6%8E%A5%E5%8F%A3HandlerInterceptor"><span class="toc-number">2.4.</span> <span class="toc-text">拦截器接口HandlerInterceptor</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E4%B8%80%E4%B8%AA%E6%8B%A6%E6%88%AA%E5%99%A8"><span class="toc-number">2.5.</span> <span class="toc-text">开发一个拦截器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E5%AE%9A%E4%B9%89%E4%B8%80%E4%B8%AA%E6%8B%A6%E6%88%AA%E5%99%A8"><span class="toc-number">2.5.1.</span> <span class="toc-text">第一步：定义一个拦截器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E9%85%8D%E7%BD%AE%E6%8B%A6%E6%88%AA%E5%99%A8"><span class="toc-number">2.5.2.</span> <span class="toc-text">第二步：配置拦截器</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%87%E6%BB%A4%E5%99%A8%E5%92%8C%E6%8B%A6%E6%88%AA%E5%99%A8%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">3.</span> <span class="toc-text">过滤器和拦截器的区别</span></a></li></ol>
+        
+    </div>
+</aside>
+
+</header>
+
+        <div id="content" class="content">
+            <div id="wrapper" class="wrapper" style="max-width: 800px">
+                <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            过滤器和拦截器
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <a class="article-date" href="http://example.com/2023/03/08/%E8%BF%87%E6%BB%A4%E5%99%A8%E5%92%8C%E6%8B%A6%E6%88%AA%E5%99%A8/index.html">
+    
+    <i class="icon-calendar vm"></i>
+    
+    <time class="vm" datetime="2023-03-08T05:07:14.177Z" itemprop="datePublished">2023-03-08</time>
+</a>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/JavaWeb/" rel="tag">JavaWeb</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <p> 过滤器和<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E6%8B%A6%E6%88%AA%E5%99%A8&spm=1001.2101.3001.7020">拦截器</a>在日常业务开发中不是经常用到，近来项目中偶尔遇到了，对过滤器和拦截器进行了一次系统学习，现总结如下。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/dhklsl/article/details/127533485">参考文章</a></p>
+<p><a target="_blank" rel="noopener" href="https://chengxy-nds.blog.csdn.net/article/details/106356958?spm=1001.2101.3001.6661.1&utm_medium=distribute.pc_relevant_t0.none-task-blog-2~default~CTRLIST~Rate-1-106356958-blog-127533485.pc_relevant_landingrelevant&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2~default~CTRLIST~Rate-1-106356958-blog-127533485.pc_relevant_landingrelevant&utm_relevant_index=1">参考文章</a></p>
+<span id="more"></span>
+
+<p><img src="/images/image-20230310181400056.png" alt="image-20230310181400056"></p>
+<p><img src="/images/image-20230310183044370.png" alt="image-20230310183044370"></p>
+<h2 id="过滤器Filter"><a href="#过滤器Filter" class="headerlink" title="过滤器Filter"></a>过滤器Filter</h2><h3 id="0-提出问题"><a href="#0-提出问题" class="headerlink" title="0.提出问题"></a>0.提出问题</h3><ol>
+<li>我们在访问后台很多页面时都需要登录，只有登录的用户才能查看这些页面，我们需要在每次请求的时候都检查用户是否登陆，这样做很麻烦，有没有一种方法可以在我们请求之前就帮我们做这些事情。有！</li>
+<li>我们 web 应用经常会接收中文字符，由于可能导致中文乱码，我们每次都需要在方法的开始使用 request.setCharacterEncoding(“utf-8”)；能不能在我们要获取参数值直接就可以自己设置好编码呀。能！</li>
+</ol>
+<p>这种问题的解决方法我们想到了一种办法。那就是在每次请求之前我们先将它拦截起来，当我们设置好一切东西的时候，再将请求放行。类似与我们地铁站的检票系统。每个人进站的时候必须刷卡，扣完钱后才可以进站坐车。</p>
+<p>web 中也有这个机制，我们叫做过滤器。</p>
+<h3 id="1-1什么是过滤器"><a href="#1-1什么是过滤器" class="headerlink" title="1.1什么是过滤器"></a>1.1什么是过滤器</h3><p> 过滤器是Servlet的高级特性之一，是实现Filter接口的Java类。其基本功能就是对servlet的调用进行干预，在servl请求和响应的过程中增加一些特定的功能。可以使用过滤器实现的功能有:统一编码，URL级别的权限<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6&spm=1001.2101.3001.7020">访问控制</a>，过滤敏感词汇，压缩请求信息。</p>
+<ol>
+<li>Filter（过滤器） 的基本功能是对 Servlet 容器调用 Servlet (JSP)的过程进行拦截，从而在 Servlet 处理请求前和 Servlet 响应请求后实现一些特殊的功能。</li>
+<li>在 Servlet API 中定义了三个接口类来开供开发人员编写 Filter 程序：Filter, FilterChain, FilterConfig</li>
+<li>Filter 程序是一个实现了 Filter 接口的 Java 类，与 Servlet 程序相似，它由 Servlet容器进行调用和执行</li>
+<li>Filter 程序需要在 web.xml 文件中进行注册和设置它所能拦截的资源：Filter 程序可以拦截 Jsp, Servlet, 静态图片文件和静态 html 文件</li>
+</ol>
+<h3 id="1-2过滤器执行原理"><a href="#1-2过滤器执行原理" class="headerlink" title="1.2过滤器执行原理"></a>1.2过滤器执行原理</h3><p><img src="/images/image-20230308133602869.png" alt="image-20230308133602869"></p>
+<ol>
+<li>当在 web.xml 中注册了一个 Filter 来对某个 Servlet 程序进行拦截处理时，这个Filter 就成了 Tomcat 与该 Servlet 程序的通信线路上的一道关卡，该 Filter 可以对Servlet 容器发送给 Servlet 程序的请求和 Servlet 程序回送给 Servlet 容器的响应进行拦截，可以决定是否将请求继续传递给 Servlet 程序，以及对请求和相应信息是否进行修改</li>
+<li>在一个 web 应用程序中可以注册多个 Filter 程序，每个 Filter 程序都可以对一个或一组 Servlet 程序进行拦截。</li>
+<li>若有多个 Filter 程序对某个 Servlet 程序的访问过程进行拦截，当针对该 Servlet 的访问请求到达时，web 容器将把这多个 Filter 程序组合成一个 Filter 链(过滤器链)。Filter 链中各个 Filter 的拦截顺序与它们在应用程序的 web.xml 中映射的顺序一致</li>
+</ol>
+<h3 id="1-3Filter接口"><a href="#1-3Filter接口" class="headerlink" title="1.3Filter接口"></a>1.3Filter接口</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Filter</span> &#123;</span><br><span class="line">    <span class="keyword">default</span> <span class="keyword">void</span> <span class="title function_">init</span><span class="params">(FilterConfig filterConfig)</span> <span class="keyword">throws</span> ServletException &#123;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">doFilter</span><span class="params">(ServletRequest var1, ServletResponse var2, FilterChain var3)</span> <span class="keyword">throws</span> IOException, ServletException;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">default</span> <span class="keyword">void</span> <span class="title function_">destroy</span><span class="params">()</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>init(FilterConfig conf)方法：用于执行过滤器的初始化工作，web容器会在web项目启动时自动调用该方法。</p>
+</li>
+<li><p>doFilter(ServletRequest request,SerlvetResponse response，FilterChain chain)方法：当请求和响应被过滤器拦截后，都会交给doFilter来处理:其中两个参数分别是被拦截request和response对象，可以使用chain的doFliter方法来放行。</p>
+</li>
+<li><p>destroy()方法：用于释放关闭Filter对象打开的资源，在web项目关闭时，由web容器自动调用该方法。</p>
+</li>
+</ul>
+<h3 id="1-4如何开发一个Filter"><a href="#1-4如何开发一个Filter" class="headerlink" title="1.4如何开发一个Filter"></a>1.4如何开发一个Filter</h3><p>开发一个过滤器比较简单，第一步实现Filter接口，第二步配置过滤器</p>
+<p>开发一个简单的filter代码如下：</p>
+<h4 id="第一步：实现Filter接口"><a href="#第一步：实现Filter接口" class="headerlink" title="第一步：实现Filter接口"></a>第一步：实现Filter接口</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.lsl.mylsl.filter;</span><br><span class="line"><span class="keyword">import</span> org.springframework.http.HttpHeaders;</span><br><span class="line"><span class="keyword">import</span> org.springframework.http.ResponseCookie;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.*;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.annotation.WebFilter;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.Cookie;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.Enumeration;</span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@WebFilter(filterName = &quot;myFilter&quot;,urlPatterns = &#123;&quot;/*&quot;&#125;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyFilter</span> <span class="keyword">implements</span> <span class="title class_">Filter</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">init</span><span class="params">(FilterConfig filterConfig)</span> <span class="keyword">throws</span> ServletException &#123;</span><br><span class="line">        <span class="comment">//获取filter名字</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">filterName</span> <span class="operator">=</span> filterConfig.getFilterName();</span><br><span class="line">        <span class="comment">//获取filter里配置的init-param配置指定参数的值,如果参数不存在，则返回 null</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">email</span> <span class="operator">=</span> filterConfig.getInitParameter(<span class="string">&quot;email&quot;</span>);</span><br><span class="line">        <span class="comment">//获取filter里配置的init-param配置所有参数值,如果过滤器没有初始化参数，则返回一个空的 Enumeration</span></span><br><span class="line">        Enumeration&lt;String&gt; initParameterNames = filterConfig.getInitParameterNames();</span><br><span class="line">        <span class="comment">//返回对调用者在其中执行操作的 ServletContext 的引用。</span></span><br><span class="line">        <span class="type">ServletContext</span> <span class="variable">servletContext</span> <span class="operator">=</span> filterConfig.getServletContext();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doFilter</span><span class="params">(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)</span> <span class="keyword">throws</span> IOException, ServletException &#123;</span><br><span class="line">        <span class="type">HttpServletRequest</span> <span class="variable">httpRequest</span> <span class="operator">=</span> (HttpServletRequest) servletRequest;</span><br><span class="line">        <span class="type">HttpServletResponse</span> <span class="variable">httpResponse</span> <span class="operator">=</span> (HttpServletResponse) servletResponse;</span><br><span class="line">        <span class="comment">//统一编码处理</span></span><br><span class="line">        httpRequest.setCharacterEncoding(<span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">        httpResponse.setContentType(<span class="string">&quot;text/html;charset=UTF-8&quot;</span>);</span><br><span class="line">        <span class="comment">//添加name属性</span></span><br><span class="line">        httpRequest.setAttribute(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;tom&quot;</span>);</span><br><span class="line">        <span class="comment">//获取请求中的所有cookie</span></span><br><span class="line">        Cookie[] cookies = httpRequest.getCookies();</span><br><span class="line">        <span class="keyword">if</span> (cookies != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="type">StringBuilder</span> <span class="variable">sb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">            <span class="keyword">for</span> (Cookie cookie : cookies) &#123;</span><br><span class="line">                <span class="type">String</span> <span class="variable">cookieName</span> <span class="operator">=</span> cookie.getName();</span><br><span class="line">                <span class="type">String</span> <span class="variable">cookieValue</span> <span class="operator">=</span> cookie.getValue();</span><br><span class="line">                <span class="comment">//设置cookie的相关属性</span></span><br><span class="line">                <span class="type">ResponseCookie</span> <span class="variable">lastCookie</span> <span class="operator">=</span> ResponseCookie.from(cookieName, cookieValue).httpOnly(<span class="literal">true</span>).sameSite(<span class="string">&quot;Lax&quot;</span>).build();</span><br><span class="line">                httpResponse.addHeader(HttpHeaders.SET_COOKIE, lastCookie.toString());</span><br><span class="line">            &#125;</span><br><span class="line">            filterChain.doFilter(httpRequest, httpResponse);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">destroy</span><span class="params">()</span> &#123;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="第二步：配置Filter"><a href="#第二步：配置Filter" class="headerlink" title="第二步：配置Filter"></a>第二步：配置Filter</h4><p>配置Filter有三种方式，上面的代码中是其中一种配置（注解配置）</p>
+<h5 id="第一种：在web-xml配置"><a href="#第一种：在web-xml配置" class="headerlink" title="第一种：在web.xml配置"></a>第一种：在web.xml配置</h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>myFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span><span class="comment">&lt;!--指为过滤器的名字--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>com.lsl.mylsl.filter.MyFilter<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span><span class="comment">&lt;!--过滤器的完整类名--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">init-param</span>&gt;</span><span class="comment">&lt;!--用于为过滤器指定初始化参数，它的资源搜索指定参数的名字--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>email<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>15***011@qq.com<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>myFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span><span class="comment">&lt;!--你在&lt;filter&gt;中声明的filter-name--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span><span class="comment">&lt;!--设置filter所拦截的请求路径（过滤器关联的URL样式）--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="第二种：注解配置，这种比较简单，定义filter上的注解"><a href="#第二种：注解配置，这种比较简单，定义filter上的注解" class="headerlink" title="第二种：注解配置，这种比较简单，定义filter上的注解"></a>第二种：注解配置，这种比较简单，定义filter上的注解</h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@WebFilter(filterName = &quot;MyFilter&quot;,urlPatterns = &#123;&quot;/*&quot;&#125;)</span><br></pre></td></tr></table></figure>
+
+<h5 id="第三种：利用配置类，相关代码如下"><a href="#第三种：利用配置类，相关代码如下" class="headerlink" title="第三种：利用配置类，相关代码如下"></a>第三种：利用配置类，相关代码如下</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.lsl.mylsl.filter;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.web.servlet.FilterRegistrationBean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyFilterConfig</span> &#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> FilterRegistrationBean <span class="title function_">myFilter</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="type">FilterRegistrationBean</span> <span class="variable">fb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FilterRegistrationBean</span>();</span><br><span class="line">        <span class="comment">//设置filter启动顺序</span></span><br><span class="line">        fb.setOrder(<span class="number">1</span>);</span><br><span class="line">        fb.setFilter(<span class="keyword">new</span> <span class="title class_">MyFilter</span>());</span><br><span class="line">        fb.addInitParameter(<span class="string">&quot;email&quot;</span>,<span class="string">&quot;15***11@qq.com&quot;</span>);</span><br><span class="line">        <span class="comment">//设置拦截请求规则,这里拦截所有请求</span></span><br><span class="line">        fb.addUrlPatterns(<span class="string">&quot;/*&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> fb;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="三种filter配置的优缺点"><a href="#三种filter配置的优缺点" class="headerlink" title="三种filter配置的优缺点"></a>三种filter配置的优缺点</h5><ol>
+<li>第一种xml的配置需要在xml中写配置，但是现在大部分是springboot项目开发，都是重注解轻配置，现在不怎么使用了。如果xml中配置了多个filter，那么按上下先后顺序依次起作用。</li>
+<li>第二种注解配置，写法比较简单，但是有一个缺点，多个filter没法控制先后顺序。如果想用这个注解，但是还想控制filter的先后顺序，网上有个说法，就是按filter的名字首字母顺序来确定先后顺序，比如有多个filter的名字是AdminFilter和UserFilter,那么就是前者先生效后者后生效。</li>
+<li>第三种配置类配置，我个人比较倾向于这个(当然如果就是一个简单filter，用注解最简单方便)，有xml配置的所有功能。<em><strong>可以定义启动顺序，初始化参数等。</strong></em></li>
+</ol>
+<h2 id="拦截器Interceptor"><a href="#拦截器Interceptor" class="headerlink" title="拦截器Interceptor"></a>拦截器Interceptor</h2><h3 id="什么是拦截器"><a href="#什么是拦截器" class="headerlink" title="什么是拦截器"></a>什么是拦截器</h3><p><em><strong><code>Spring MVC</code> 中的拦截器( <code>Interceptor</code> )类似于<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=ServLet&spm=1001.2101.3001.7020">Servlet</a>中的过滤器( <code>Filter</code> )，它主要用于拦截用户请求并作出相应的处理。例如通过拦截器可以进行权限验证、记录请求信息的日志、判断用户是否登录等。</strong></em></p>
+<h3 id="拦截器工作原理"><a href="#拦截器工作原理" class="headerlink" title="拦截器工作原理"></a>拦截器工作原理</h3><p>一个拦截器，只有preHandler方法返回 true ，postHandler，afterCompletion才能被执行；如果preHandle方法返回 false ，则该拦截器的 postHandler，afterCompletion 必然不会被执行。拦截器不是Filter，却实现了Filter的功能，其原理在于：</p>
+<p>所有的<em>拦截器 (Interceptor)</em> 和<em>处理器 (Handler)</em> 都注册在 HandlerMapping 中。Spring MVC 中所有的请求都是由 DispatcherServlet 分发的。 当请求进入 DispatcherServlet.doDispatch() 时候，首先会得到处理该请求的 Handler （即 Controller 中对应的方法）以及所有拦截该请求的拦截器。拦截器就是在这里被调用开始工作的。</p>
+<h3 id="拦截器的使用情景"><a href="#拦截器的使用情景" class="headerlink" title="拦截器的使用情景"></a>拦截器的使用情景</h3><p>拦截器本质上是面向切面编程（AOP），符合<em><strong>横切关注点</strong></em>的功能都可以放在拦截器中来实现，主要的应用场景包括：</p>
+<ul>
+<li>登录验证，判断用户是否登录</li>
+<li>权限管理，判断用户是否有权限访问资源，如校验token</li>
+<li>日志记录，记录请求操作日志（用户ip，访问时间等），以便统计请求访问量。</li>
+<li>处理cookie、本地化、国际化、主题等</li>
+<li>性能监控，监控请求处理时长等</li>
+</ul>
+<h3 id="拦截器接口HandlerInterceptor"><a href="#拦截器接口HandlerInterceptor" class="headerlink" title="拦截器接口HandlerInterceptor"></a>拦截器接口HandlerInterceptor</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.springframework.web.servlet;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"><span class="keyword">import</span> org.springframework.lang.Nullable;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">HandlerInterceptor</span> &#123;</span><br><span class="line">    <span class="keyword">default</span> <span class="type">boolean</span> <span class="title function_">preHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">default</span> <span class="keyword">void</span> <span class="title function_">postHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler, <span class="meta">@Nullable</span> ModelAndView modelAndView)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">default</span> <span class="keyword">void</span> <span class="title function_">afterCompletion</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler, <span class="meta">@Nullable</span> Exception ex)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 从代码可以看出，拦截器接口有三个方法，分别的作用是：</p>
+<ul>
+<li>preHandler：叫做预处理方法，本方法在控制器方法（MyController的方法）之前执行，用户的请求最先到达此2方法，在这个方法中可以获取请求的信息，验证请求是否符合要求。以验证用户是否登录，验证用户是否有权限访问某个链接地址url。如果返回true则放行，返回false则拦截。</li>
+<li>postHandler：叫做后处理方法。在controller中的方法之后执行。能够获取到处理器方法的返回值 mv ，可以修改 mv 的数据和视图。可以影响到最后的执行结果。主要是对原来的执行结果做二次修正</li>
+<li>afterCompletion：最后执行的方法，在页面渲染之后执行。在请求处理完成后执行的，框架中规定是当你的视图处理完成后，对视图进行了 <em><strong>forward</strong></em>。就任务请求处理完成。一般做资源回收工作的，程序请求过程中创建了一些对象。在这里可以删除，把占用的内存回收。</li>
+</ul>
+<h3 id="开发一个拦截器"><a href="#开发一个拦截器" class="headerlink" title="开发一个拦截器"></a>开发一个拦截器</h3><p>开发一个拦截器也需要2步，第一步是实现HandlerInterceptor接口来定义一个拦截器，第二步就是配置拦截器了</p>
+<h4 id="第一步：定义一个拦截器"><a href="#第一步：定义一个拦截器" class="headerlink" title="第一步：定义一个拦截器"></a>第一步：定义一个拦截器</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.lsl.mylsl.interceptor;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> org.springframework.web.servlet.HandlerInterceptor;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.servlet.ModelAndView;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.Cookie;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyInterceptor</span> <span class="keyword">implements</span> <span class="title class_">HandlerInterceptor</span> &#123;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">preHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler)</span> &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//在拦截的请求了添加属性,在对应请求的controller中的request中就可以获取该参数了</span></span><br><span class="line">        <span class="comment">//比如String userName = (String)request.getAttribute(&quot;userName&quot;);</span></span><br><span class="line">        request.setAttribute(<span class="string">&quot;userName&quot;</span>,<span class="string">&quot;lsl&quot;</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//获取cookie</span></span><br><span class="line">        Cookie[] cookies = request.getCookies();</span><br><span class="line"> </span><br><span class="line">        <span class="comment">//设置header属性</span></span><br><span class="line">        response.addHeader(<span class="string">&quot;SameSite&quot;</span>,<span class="string">&quot;Lax&quot;</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//添加cookie</span></span><br><span class="line">        <span class="type">Cookie</span> <span class="variable">cookie</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Cookie</span>(<span class="string">&quot;name&quot;</span>,<span class="string">&quot;lsl&quot;</span>);</span><br><span class="line">        response.addCookie(cookie);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">postHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        HandlerInterceptor.<span class="built_in">super</span>.postHandle(request, response, handler, modelAndView);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">afterCompletion</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        HandlerInterceptor.<span class="built_in">super</span>.afterCompletion(request, response, handler, ex);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="第二步：配置拦截器"><a href="#第二步：配置拦截器" class="headerlink" title="第二步：配置拦截器"></a>第二步：配置拦截器</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">package com.lsl.mylsl.interceptor;</span><br><span class="line"> </span><br><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line">import org.springframework.web.servlet.config.annotation.InterceptorRegistry;</span><br><span class="line">import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;</span><br><span class="line"> </span><br><span class="line">/**</span><br><span class="line"> * 拦截器配置类</span><br><span class="line"> */</span><br><span class="line">@Configuration</span><br><span class="line">public class MyInterceptorConfig implements WebMvcConfigurer &#123;</span><br><span class="line"> </span><br><span class="line">    /**</span><br><span class="line">     * 配置拦截器</span><br><span class="line">     * @param registry</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public void addInterceptors(InterceptorRegistry registry)&#123;</span><br><span class="line">        registry.addInterceptor(myInterceptor())</span><br><span class="line">                .addPathPatterns(&quot;/api/lsl/**&quot;)//需要拦截的请求</span><br><span class="line">                .addPathPatterns(&quot;/api/mjx/**&quot;)//需要拦截的请求</span><br><span class="line">                .excludePathPatterns(&quot;/api/debug/**&quot;)//不拦截的请求</span><br><span class="line">                .excludePathPatterns(&quot;api/lsl/getName&quot;);//不拦截的请求</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    /**</span><br><span class="line">     * 注入拦截器到spring容器</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    @Bean</span><br><span class="line">    public MyInterceptor myInterceptor()&#123;</span><br><span class="line">        return new MyInterceptor();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="过滤器和拦截器的区别"><a href="#过滤器和拦截器的区别" class="headerlink" title="过滤器和拦截器的区别"></a>过滤器和拦截器的区别</h2><ol>
+<li>拦截器是基于Java反射机制实现的，而过滤器是基于函数回调（责任链）</li>
+<li>过滤器依赖于servlet容器，而拦截器不依赖于servlet容器</li>
+<li>拦截器只能对 <em><strong>action 请求</strong></em>起作用，而过滤器则对几乎所有的请求起作用</li>
+<li>拦截器可以访问 <strong>action <em>上下文</em></strong>、<em><strong>值栈</strong></em>里的对象，而过滤器不能</li>
+<li>在 <em><strong>action</strong></em> 的生命周期中，拦截器可以多次被调用，而过滤器只能在容器初始化时被调用一次</li>
+<li>拦截器可以获取获取IOC容器中的各个bean，而过滤器不行，这点很重要，在拦截器里注入一个service，可以调用业务逻辑</li>
+<li>过滤器属于servlet，而拦截器属于springmvc</li>
+<li>过滤器可以拦截所有请求，包括访问静态资源的请求，拦截器只能拦截 <em><strong>action请求</strong></em>，即访问 controller 的请求。</li>
+</ol>
+<p>通俗理解：<br>（1）过滤器（Filter）：当你有一堆东西的时候，你只希望选择符合你要求的某一些东西。定义这些要求的工具，就是过滤器。（理解：就是一堆字母中取一个B）<br>（2）拦截器（Interceptor）：在一个流程正在进行的时候，你希望干预它的进展，甚至终止它进行，这是拦截器做的事情。（理解：就是一堆字母中，干预它，通过验证的少点，顺便干点别的东西</p>
+<p><strong>过滤器和拦截器图解</strong></p>
+<p><img src="/images/image-20230310180233319.png" alt="image-20230310180233319"></p>
+
+        
+    </section>
+</article>
+
+
+
+<div class="comments">
+    <div id="comments"></div>
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+    new Gitalk({
+        clientID: "7fbe80427f54741e289f",
+        clientSecret: "f34ed5fd92e54c9000bd37ba951948cb939deff5",
+        repo: "icode-wild-cat.github.io",
+        owner: "sanonz",
+        admin: ["sanonz"],
+        id: "6cdce1a8ba35e31fbe84975a59ee96a5",
+        distractionFreeMode: true,
+        title: "过滤器和拦截器",
+        body: "http://example.com/2023/03/08/%E8%BF%87%E6%BB%A4%E5%99%A8%E5%92%8C%E6%8B%A6%E6%88%AA%E5%99%A8/",
+        labels: ["JavaWeb"]
+    }).render('comments');
+    </script>
+</div>
+
+
+
+            </div>
+        </div>
+
+        
+            
+            <a id="pagenext" href="/2023/03/07/Nginx%E5%BA%95%E5%B1%82%E8%AE%BE%E8%AE%A1%E4%B8%8E%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="article-next" title=""><i class="icon-arrow-right"></i></a>
+            
+            
+            <a id="pageprev" href="/2023/03/08/Servlet/" class="article-prev" title="Servlet"><i class="icon-arrow-left"></i></a>
+            
+        
+
+        <footer class="footer">
+    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, Theme by <a href="https://github.com/sanonz/hexo-theme-concise" target="_blank">Concise</a>
+
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?e4027971a230b210f4671f485b33846a";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    
+</footer>
+
+    </main>
+
+    <script type="text/javascript" src="https://unpkg.com/jquery@1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        var nodes = {
+            nav: $('#nav'),
+            aside: $('#aside'),
+            asideInner: $('#aside-inner'),
+            navInner: $('#nav-inner')
+        };
+
+        var doing = false;
+        nodes.asideInner.on('webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', function() {
+            if (nodes.aside.hasClass('mobile-open')) {
+                nodes.aside.removeClass('mobile-open');
+            } else {
+                nodes.aside.removeClass('mobile-close panel-show');
+            }
+            doing = false;
+        });
+        $('#open-panel, #aside-mask').on('click', function() {
+            if (doing) {
+                return;
+            }
+
+            if (nodes.aside.hasClass('panel-show')) {
+                nodes.aside.addClass('mobile-close');
+            } else {
+                nodes.aside.addClass('mobile-open panel-show');
+            }
+        });
+        $('#open-menus').on('click', function() {
+            nodes.navInner.slideToggle('normal', slideDone);
+        });
+
+        if (window.innerWidth <= 960) {
+            setTimeout(function() {
+                nodes.navInner.slideUp('normal', slideDone);
+            }, 3000);
+        }
+
+        function slideDone() {
+            if (nodes.navInner.css('display') !== 'none') {
+                nodes.navInner.css('display', '');
+            }
+        }
+
+        $(window).on('resize', function() {
+            if ($(this).width() > 960) {
+                nodes.navInner.css('display', '');
+            }
+        });
+    });
+    </script>
+    
+        
+<script src="/js/scrollspy.min.js"></script>
+
+        <script type="text/javascript">
+        $(document.body).scrollspy({target: '#aside-inner'});
+
+        $(window).on('resize', function() {
+            var hw = $('#header').width();
+            var ww = $('#wrapper').width();
+            var space = ($(this).width() - hw - ww) / 2 / 2;
+
+            var pageprev = $('#pageprev');
+            var pagenext = $('#pagenext');
+            var avg = (pageprev.width() + pagenext.width()) / 2
+
+            if(space > avg) {
+                var len = space - avg / 2;
+                var styles = {position: 'fixed', top: '50%', marginTop: - (pageprev.width() + pagenext.width()) / 4}
+                pageprev.css($.extend({left: hw + len}, styles));
+                pagenext.css($.extend({right: len}, styles));
+            } else {
+                pageprev.removeAttr('style');
+                pagenext.removeAttr('style');
+            }
+        }).trigger('resize');
+        </script>
+    
+
+</body>
+</html>

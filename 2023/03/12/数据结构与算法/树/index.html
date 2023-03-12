@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+
+    
+
+    
+
+    <title>树 | DodgeWildCat&#39;s Blog</title>
+    <meta name="author" content="John Doe" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="参考教程 [参考博客](树 - 基础和Overview | Java 全栈知识体系 (pdai.tech))树树是一种数据结构，它是 n (n&amp;gt;&amp;#x3D;0) 个节点的有限集。n&amp;#x3D;0 时称为空树。n&amp;gt;0时，有限集的元素构成一个具有层次感的数据结构 。 区别于线性表一对一的元素关系，树中的节点是一对多的关系。树具有以下特点：n&amp;gt;0时，根节点是惟一的，不可能存在多个根节点每个节点有零个至多个子节点；除了根节点外，每个节点有且仅有一个父节点。根节点没有父节点。树的相关概念" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+
+    
+    <link rel="alternate" href="/atom.xml" title="DodgeWildCat&#39;s Blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/images/favicon.ico">
+    
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'icomoon';
+        src: url("/fonts/icomoon.eot?q628ml");
+        src: url("/fonts/icomoon.eot?q628ml#iefix") format('embedded-opentype'),
+             url("/fonts/icomoon.ttf?q628ml") format('truetype'),
+             url("/fonts/icomoon.woff?q628ml") format('woff'),
+             url("/fonts/icomoon.svg?q628ml#icomoon") format('svg');
+        font-weight: normal;
+        font-style: normal;
+    }
+    </style>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!--[if lt IE 9]><style type="text/css">.nav-inner {top:0;}.author-meta {position:static;top:0;}.search-form {height:36px;}</style><script type="text/javascript" src="https://unpkg.com/html5shiv@3.7.3/dist/html5shiv.min.js"></script><![endif]-->
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+
+    <main class="app">
+        <header id="header" class="header clearfix">
+    <div id="nav" class="nav">
+    <div class="nav-mobile">
+        <button id="open-panel" class="open-panel nav-mobile-item"><i class="icon-documents"></i></button>
+        <h1 class="nav-mobile-title nav-mobile-item">DodgeWildCat&#39;s Blog</h1>
+        <button id="open-menus" class="open-panel nav-mobile-item"><i class="icon-library"></i></button>
+    </div>
+
+    <nav id="nav-inner" class="nav-inner">
+        
+            <a class="nav-item" href="/">
+                <span class="nav-text">首页</span>
+            </a>
+        
+            <a class="nav-item" href="/categories/mech">
+                <span class="nav-text">机械</span>
+            </a>
+        
+            <a class="nav-item" href="/categories/srccode">
+                <span class="nav-text">源码系列</span>
+            </a>
+        
+            <a class="nav-item" href="/categories/back-end">
+                <span class="nav-text">后端</span>
+            </a>
+        
+            <a class="nav-item" href="/categories/front-end">
+                <span class="nav-text">前端</span>
+            </a>
+        
+            <a class="nav-item" href="/categories/ss">
+                <span class="nav-text">社科</span>
+            </a>
+        
+            <a class="nav-item" href="/categories/art">
+                <span class="nav-text">Art</span>
+            </a>
+        
+            <a class="nav-item" href="/categories/studymind">
+                <span class="nav-text">学习思想</span>
+            </a>
+        
+            <a class="nav-item" href="/tags">
+                <span class="nav-text">标签</span>
+            </a>
+        
+            <a class="nav-item" href="/archives">
+                <span class="nav-text">归档</span>
+            </a>
+        
+            <a class="nav-item" href="/atom.xml">
+                <span class="nav-text">订阅</span>
+            </a>
+        
+            <a class="nav-item" href="/about">
+                <span class="nav-text">关于</span>
+            </a>
+        
+    </nav>
+</div>
+
+    <aside id="aside" class="aside">
+    <div id="aside-mask" class="aside-mask"></div>
+    <div id="aside-inner" class="aside-inner">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"><i class="icon-search-stroke"></i></button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+
+        
+        
+        
+        
+
+        
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A0%91"><span class="toc-number">1.</span> <span class="toc-text">树</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%91%E7%9A%84%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.</span> <span class="toc-text">树的相关概念</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E3%80%81%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91%E3%80%81%E6%BB%A1%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="toc-number">2.</span> <span class="toc-text">二叉树、完全二叉树、满二叉树</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91-BST"><span class="toc-number">3.</span> <span class="toc-text">二叉查找树 - BST</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91-AVL"><span class="toc-number">4.</span> <span class="toc-text">平衡二叉树 - AVL</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BA%A2%E9%BB%91%E6%A0%91"><span class="toc-number">5.</span> <span class="toc-text">红黑树</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%93%88%E5%BC%97%E6%9B%BC%E6%A0%91"><span class="toc-number">6.</span> <span class="toc-text">哈弗曼树</span></a></li></ol>
+        
+    </div>
+</aside>
+
+</header>
+
+        <div id="content" class="content">
+            <div id="wrapper" class="wrapper" style="max-width: 800px">
+                <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            树
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <a class="article-date" href="http://example.com/2023/03/12/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%A0%91/index.html">
+    
+    <i class="icon-calendar vm"></i>
+    
+    <time class="vm" datetime="2023-03-12T04:43:45.579Z" itemprop="datePublished">2023-03-12</time>
+</a>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag">数据结构与算法</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <p><a href="%5B%E5%B0%9A%E7%A1%85%E8%B0%B7%E9%9F%A9%E9%A1%BA%E5%B9%B3java%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95%5D(https://pan.baidu.com/s/1Kg7UUpO3wwALX6x28cWA7A#list/path=/%E5%B0%9A%E7%A1%85%E8%B0%B7Java%E5%AD%A6%E7%A7%91%E5%85%A8%E5%A5%97%E6%95%99%E7%A8%8B%EF%BC%88%E6%80%BB207.77GB%EF%BC%89/1.%E5%B0%9A%E7%A1%85%E8%B0%B7%E5%85%A8%E5%A5%97JAVA%E6%95%99%E7%A8%8B--%E5%9F%BA%E7%A1%80%E5%BF%85%E5%A4%87%EF%BC%8867.32GB%EF%BC%89/MySQL%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF&parentPath=/)">参考教程</a> [参考博客](<a target="_blank" rel="noopener" href="https://www.pdai.tech/md/algorithm/alg-basic-tree.html">树 - 基础和Overview | Java 全栈知识体系 (pdai.tech)</a>)</p>
+<span id="more"></span>
+
+<p><img src="/2023/03/12/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%A0%91/Users\11465\icode-Wild-Cat.github.io\source\images\alg-tree-0.png" alt="img"></p>
+<h1 id="树"><a href="#树" class="headerlink" title="树"></a>树</h1><p>树是一种数据结构，它是 n (n&gt;&#x3D;0) 个节点的有限集。n&#x3D;0 时称为空树。n&gt;0时，有限集的元素构成一个具有层次感的数据结构 。</p>
+<p> <img src="/2023/03/12/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%A0%91/Users\11465\icode-Wild-Cat.github.io\source\images\alg-tree-1.png" alt="img"></p>
+<p>区别于线性表一对一的元素关系，树中的节点是一对多的关系。树具有以下特点：</p>
+<ul>
+<li>n&gt;0时，根节点是惟一的，不可能存在多个根节点</li>
+<li>每个节点有零个至多个子节点；除了根节点外，每个节点有且仅有一个父节点。根节点没有父节点。</li>
+</ul>
+<h2 id="树的相关概念"><a href="#树的相关概念" class="headerlink" title="树的相关概念"></a>树的相关概念</h2><ul>
+<li>子树：除了根节点外，每个子节点都可以分为多个不相交的子树。（图二）</li>
+<li>孩子与双亲：若一个节点有子树，那么该节点称为子树根的“双亲”，子树的根是该节点的“孩子”。在图一种，B、H是A的孩子，A是B、H的双亲。</li>
+<li>兄弟：具有相同双亲的节点互为兄弟，例如B与H互为兄弟。</li>
+<li><strong>节点的度：一个节点拥有子树的数目</strong>。例如A的度为2，B的度为1，C的度为3.</li>
+<li>叶子（叶子节点）：没有子树，也即是度为0的节点。</li>
+<li>分支节点：除了叶子结点之外的节点，也即度不为0的节点。</li>
+<li>内部节点：除了根节点之外的分支节点</li>
+<li>层次：根节点外第一层，其余节点的层次等于其双亲节点的层次加1.</li>
+<li>数的高度：也称为树的深度，树中节点的最大层次。</li>
+<li>有序树：树中节点各子树之间的次序是重要的，不可以随意交换位置。</li>
+<li>无序数：树中节点各子树之间的次序是不重要的。可以随意交换位置。</li>
+<li><strong>森林：0或多颗互不相交的树的集合</strong>。例如图二中的两颗树为森林</li>
+</ul>
+<h1 id="二叉树、完全二叉树、满二叉树"><a href="#二叉树、完全二叉树、满二叉树" class="headerlink" title="二叉树、完全二叉树、满二叉树"></a>二叉树、完全二叉树、满二叉树</h1><ul>
+<li><p>二叉树：最多有两颗子树的树被称为二叉树</p>
+<p><img src="/2023/03/12/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%A0%91/Users\11465\icode-Wild-Cat.github.io\source\images\alg-tree-3.png" alt="img"></p>
+</li>
+<li><p>斜树：所有节点都只有左子树的二叉树叫做左斜树，所有节点都只有右子树的二叉树叫做右斜树。（本质是链表）</p>
+<p><img src="/2023/03/12/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%A0%91/Users\11465\icode-Wild-Cat.github.io\source\images\alg-tree-4.png" alt="img"></p>
+</li>
+<li><p>满二叉树：二叉树中所有非叶子结点的度都是2，且叶子结点都在同一层次上</p>
+<p><img src="/2023/03/12/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%A0%91/Users\11465\icode-Wild-Cat.github.io\source\images\alg-tree-5.png" alt="img"></p>
+</li>
+<li><p>完全二叉树：如果一个二叉树与满二叉树前m个节点的结构相同，这样的二叉树被称为完全二叉树</p>
+<p><img src="/2023/03/12/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%A0%91/Users\11465\icode-Wild-Cat.github.io\source\images\alg-tree-6.png" alt="img"></p>
+</li>
+</ul>
+<h1 id="二叉查找树-BST"><a href="#二叉查找树-BST" class="headerlink" title="二叉查找树 - BST"></a>二叉查找树 - BST</h1><p>二叉查找树(Binary Search Tree)是指一棵空树或者具有下列性质的二叉树:</p>
+<ul>
+<li>若任意节点的左子树不空，则左子树上所有节点的值均小于它的根节点的值；</li>
+<li>若任意节点的右子树不空，则右子树上所有节点的值均大于它的根节点的值；</li>
+<li>任意节点的左、右子树也分别为二叉查找树；</li>
+<li>没有键值相等的节点。</li>
+</ul>
+<p>二叉查找树相较于其他数据结构的优势在于查找、插入的时间复杂度较低为O(lgN)。二叉查找树是基础性数据结构，用于构建更为抽象的数据结构，如集合、多重集、关联数组等。</p>
+<p><img src="/2023/03/12/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%A0%91/Users\11465\icode-Wild-Cat.github.io\source\images\alg-tree-binary-search-1.svg" alt="img"></p>
+<h1 id="平衡二叉树-AVL"><a href="#平衡二叉树-AVL" class="headerlink" title="平衡二叉树 - AVL"></a>平衡二叉树 - AVL</h1><p>含有相同节点的二叉查找树可以有不同的形态，而二叉查找树的平均查找长度与树的深度有关，所以需要找出一个查找平均长度最小的一颗，那就是平衡二叉树，具有以下性质：</p>
+<ul>
+<li><p>要么是颗空树，要么其根节点左右子树的深度之差不超过1；</p>
+</li>
+<li><p>其左右子树也都是平衡二叉树</p>
+</li>
+<li><p>二叉树节点的平衡因子定义为该节点的左子树的深度减去右子树的深度。则平衡额二叉树的所有节点的平衡因子只可能是-1,0,1</p>
+<p><img src="/2023/03/12/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%A0%91/Users\11465\icode-Wild-Cat.github.io\source\images\alg-tree-balance-tree-1.jpg" alt="img"></p>
+</li>
+</ul>
+<h1 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h1><p>红黑树也是一种自平衡的二叉查找树。</p>
+<ul>
+<li>每个节点要么是红的要么是黑的。（红或黑）</li>
+<li>根节点是黑的。（根黑）</li>
+<li>每个叶结点（叶节点即指树尾端NIL指针或NULL节点）都是黑的。（叶黑）</li>
+<li>如果一个节点红的，那么它的两个儿子都是黑的。（红子黑）</li>
+<li>对于任意节点而言，其到叶节点树尾端NIL指针的每条路径都包含相同数目的黑节点。（路径下黑相同）</li>
+</ul>
+<p>用法最广:</p>
+<ul>
+<li>Java ConcurrentHashMap &amp; TreeMap</li>
+<li>C++ STL: map &amp; set</li>
+<li>linux进程调度Completely Fair Scheduler,用红黑树管理进程控制块</li>
+<li>epoll在内核中的实现，用红黑树管理事件块</li>
+<li>nginx中，用红黑树管理timer等</li>
+</ul>
+<h1 id="哈弗曼树"><a href="#哈弗曼树" class="headerlink" title="哈弗曼树"></a>哈弗曼树</h1><p>哈弗曼又称最优二叉树。是一种带权路径长度最短的二叉树，一般可以按下面步骤构建：</p>
+<ul>
+<li>将所有左、右子树都为空的作为根节点。</li>
+<li>在森林中选出两棵根节点的权值最小的树作为一颗新树的左右子树，</li>
+</ul>
+
+        
+    </section>
+</article>
+
+
+
+<div class="comments">
+    <div id="comments"></div>
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+    new Gitalk({
+        clientID: "7fbe80427f54741e289f",
+        clientSecret: "f34ed5fd92e54c9000bd37ba951948cb939deff5",
+        repo: "icode-wild-cat.github.io",
+        owner: "sanonz",
+        admin: ["sanonz"],
+        id: "97464c84af2d20f0653632e50d02d2f6",
+        distractionFreeMode: true,
+        title: "树",
+        body: "http://example.com/2023/03/12/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%A0%91/",
+        labels: ["数据结构与算法"]
+    }).render('comments');
+    </script>
+</div>
+
+
+
+            </div>
+        </div>
+
+        
+            
+            <a id="pagenext" href="/2023/03/12/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/" class="article-next" title="排序"><i class="icon-arrow-right"></i></a>
+            
+            
+            <a id="pageprev" href="/2023/03/12/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%BD%93%E7%B3%BB%E6%A6%82%E8%A7%88/" class="article-prev" title="数据结构和算法体系概览"><i class="icon-arrow-left"></i></a>
+            
+        
+
+        <footer class="footer">
+    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, Theme by <a href="https://github.com/sanonz/hexo-theme-concise" target="_blank">Concise</a>
+
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?e4027971a230b210f4671f485b33846a";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    
+</footer>
+
+    </main>
+
+    <script type="text/javascript" src="https://unpkg.com/jquery@1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        var nodes = {
+            nav: $('#nav'),
+            aside: $('#aside'),
+            asideInner: $('#aside-inner'),
+            navInner: $('#nav-inner')
+        };
+
+        var doing = false;
+        nodes.asideInner.on('webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', function() {
+            if (nodes.aside.hasClass('mobile-open')) {
+                nodes.aside.removeClass('mobile-open');
+            } else {
+                nodes.aside.removeClass('mobile-close panel-show');
+            }
+            doing = false;
+        });
+        $('#open-panel, #aside-mask').on('click', function() {
+            if (doing) {
+                return;
+            }
+
+            if (nodes.aside.hasClass('panel-show')) {
+                nodes.aside.addClass('mobile-close');
+            } else {
+                nodes.aside.addClass('mobile-open panel-show');
+            }
+        });
+        $('#open-menus').on('click', function() {
+            nodes.navInner.slideToggle('normal', slideDone);
+        });
+
+        if (window.innerWidth <= 960) {
+            setTimeout(function() {
+                nodes.navInner.slideUp('normal', slideDone);
+            }, 3000);
+        }
+
+        function slideDone() {
+            if (nodes.navInner.css('display') !== 'none') {
+                nodes.navInner.css('display', '');
+            }
+        }
+
+        $(window).on('resize', function() {
+            if ($(this).width() > 960) {
+                nodes.navInner.css('display', '');
+            }
+        });
+    });
+    </script>
+    
+        
+<script src="/js/scrollspy.min.js"></script>
+
+        <script type="text/javascript">
+        $(document.body).scrollspy({target: '#aside-inner'});
+
+        $(window).on('resize', function() {
+            var hw = $('#header').width();
+            var ww = $('#wrapper').width();
+            var space = ($(this).width() - hw - ww) / 2 / 2;
+
+            var pageprev = $('#pageprev');
+            var pagenext = $('#pagenext');
+            var avg = (pageprev.width() + pagenext.width()) / 2
+
+            if(space > avg) {
+                var len = space - avg / 2;
+                var styles = {position: 'fixed', top: '50%', marginTop: - (pageprev.width() + pagenext.width()) / 4}
+                pageprev.css($.extend({left: hw + len}, styles));
+                pagenext.css($.extend({right: len}, styles));
+            } else {
+                pageprev.removeAttr('style');
+                pagenext.removeAttr('style');
+            }
+        }).trigger('resize');
+        </script>
+    
+
+</body>
+</html>

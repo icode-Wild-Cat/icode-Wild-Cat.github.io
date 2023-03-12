@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+
+    
+
+    
+
+    <title>3.8 | DodgeWildCat&#39;s Blog</title>
+    <meta name="author" content="John Doe" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="坚持就是胜利！！！1.java序列化参考1参考2什么是序列化和反序列？把对象持久化保存在文件中或在网络中传输对象等就要用到序列化，简单讲就是数据结构或对象与二进制字节流之间转换的过程。常见应用场景：对象在网络传输（比如远程方法调用 RPC 的时候）之前需要先被序列化，接收到序列化的对象之后需要再反序列化；将对象存储到文件之前需要序列化，将对象从文件中读取出来需要反序列化；将对象存储到数据库（如 Redis）之前需要序列化，将对象从缓存数据库中读取出来反序列化；将对象存储到内存之前需要序列化，从内" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+
+    
+    <link rel="alternate" href="/atom.xml" title="DodgeWildCat&#39;s Blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/images/favicon.ico">
+    
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'icomoon';
+        src: url("/fonts/icomoon.eot?q628ml");
+        src: url("/fonts/icomoon.eot?q628ml#iefix") format('embedded-opentype'),
+             url("/fonts/icomoon.ttf?q628ml") format('truetype'),
+             url("/fonts/icomoon.woff?q628ml") format('woff'),
+             url("/fonts/icomoon.svg?q628ml#icomoon") format('svg');
+        font-weight: normal;
+        font-style: normal;
+    }
+    </style>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!--[if lt IE 9]><style type="text/css">.nav-inner {top:0;}.author-meta {position:static;top:0;}.search-form {height:36px;}</style><script type="text/javascript" src="https://unpkg.com/html5shiv@3.7.3/dist/html5shiv.min.js"></script><![endif]-->
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+
+    <main class="app">
+        <header id="header" class="header clearfix">
+    <div id="nav" class="nav">
+    <div class="nav-mobile">
+        <button id="open-panel" class="open-panel nav-mobile-item"><i class="icon-documents"></i></button>
+        <h1 class="nav-mobile-title nav-mobile-item">DodgeWildCat&#39;s Blog</h1>
+        <button id="open-menus" class="open-panel nav-mobile-item"><i class="icon-library"></i></button>
+    </div>
+
+    <nav id="nav-inner" class="nav-inner">
+        
+            <a class="nav-item" href="/">
+                <span class="nav-text">首页</span>
+            </a>
+        
+            <a class="nav-item" href="/categories/mech">
+                <span class="nav-text">机械</span>
+            </a>
+        
+            <a class="nav-item" href="/categories/srccode">
+                <span class="nav-text">源码系列</span>
+            </a>
+        
+            <a class="nav-item" href="/categories/back-end">
+                <span class="nav-text">后端</span>
+            </a>
+        
+            <a class="nav-item" href="/categories/front-end">
+                <span class="nav-text">前端</span>
+            </a>
+        
+            <a class="nav-item" href="/categories/ss">
+                <span class="nav-text">社科</span>
+            </a>
+        
+            <a class="nav-item" href="/categories/art">
+                <span class="nav-text">Art</span>
+            </a>
+        
+            <a class="nav-item" href="/categories/studymind">
+                <span class="nav-text">学习思想</span>
+            </a>
+        
+            <a class="nav-item" href="/tags">
+                <span class="nav-text">标签</span>
+            </a>
+        
+            <a class="nav-item" href="/archives">
+                <span class="nav-text">归档</span>
+            </a>
+        
+            <a class="nav-item" href="/atom.xml">
+                <span class="nav-text">订阅</span>
+            </a>
+        
+            <a class="nav-item" href="/about">
+                <span class="nav-text">关于</span>
+            </a>
+        
+    </nav>
+</div>
+
+    <aside id="aside" class="aside">
+    <div id="aside-mask" class="aside-mask"></div>
+    <div id="aside-inner" class="aside-inner">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"><i class="icon-search-stroke"></i></button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+
+        
+        
+        
+        
+
+        
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-java%E5%BA%8F%E5%88%97%E5%8C%96"><span class="toc-number">1.</span> <span class="toc-text">1.java序列化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%EF%BC%9F"><span class="toc-number">1.1.</span> <span class="toc-text">什么是序列化和反序列？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%8F%E5%88%97%E5%8C%96%E5%8D%8F%E8%AE%AE%E5%AF%B9%E5%BA%94%E4%BA%8E-TCP-x2F-IP-4-%E5%B1%82%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%93%AA%E4%B8%80%E5%B1%82%EF%BC%9F"><span class="toc-number">1.2.</span> <span class="toc-text">序列化协议对应于 TCP&#x2F;IP 4 层模型的哪一层？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%8D%8F%E8%AE%AE%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-number">1.3.</span> <span class="toc-text">常见的序列化协议有哪些？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JDK-%E8%87%AA%E5%B8%A6%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E6%96%B9%E5%BC%8F"><span class="toc-number">1.3.1.</span> <span class="toc-text">JDK 自带的序列化方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#serialVersionUID%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8%EF%BC%9F"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">serialVersionUID有什么用？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#serialVersion%E4%B8%8D%E6%98%AF%E8%A2%AB-static-%E4%BF%AE%E9%A5%B0%E4%BA%86%E5%90%97%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E4%BC%9A%E8%A2%AB%E2%80%9C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E2%80%9D%EF%BC%9F"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">serialVersion不是被 static 修饰了吗，为什么还会被“反序列化”？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E6%9E%9C%E6%9C%89%E4%BA%9B%E5%AD%97%E6%AE%B5%E4%B8%8D%E6%83%B3%E8%BF%9B%E8%A1%8C%E5%BA%8F%E5%88%97%E5%8C%96%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F"><span class="toc-number">1.3.1.3.</span> <span class="toc-text">如果有些字段不想进行序列化怎么办？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8JDK%E8%87%AA%E5%B8%A6%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%EF%BC%9F"><span class="toc-number">1.3.1.4.</span> <span class="toc-text">为什么不推荐使用JDK自带的序列化？</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Kryo"><span class="toc-number">1.3.2.</span> <span class="toc-text">Kryo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Protobuf"><span class="toc-number">1.3.3.</span> <span class="toc-text">Protobuf</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ProtoStuff"><span class="toc-number">1.3.4.</span> <span class="toc-text">ProtoStuff</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hessian"><span class="toc-number">1.3.5.</span> <span class="toc-text">Hessian</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.4.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-java%E5%8F%8D%E5%B0%84"><span class="toc-number">2.</span> <span class="toc-text">2.java反射</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9C%80%E6%B1%82"><span class="toc-number">2.1.</span> <span class="toc-text">需求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%95%E4%B8%BA%E5%8F%8D%E5%B0%84%EF%BC%9F"><span class="toc-number">2.2.</span> <span class="toc-text">何为反射？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6"><span class="toc-number">2.3.</span> <span class="toc-text">反射机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84%E5%8F%8A%E5%88%B6%E9%80%A0%E5%8F%AF%E4%BB%A5%E5%AE%8C%E6%88%90%E7%9A%84%E4%BB%BB%E5%8A%A1%EF%BC%9A"><span class="toc-number">2.3.1.</span> <span class="toc-text">反射及制造可以完成的任务：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E8%A6%81%E7%B1%BB%EF%BC%88%E5%85%B6%E4%B8%AD5%E5%92%8C6%E6%98%AF%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E7%9A%84%E6%A0%B8%E5%BF%83%EF%BC%89"><span class="toc-number">2.3.2.</span> <span class="toc-text">主要类（其中5和6是动态代理的核心）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86%E5%9B%BE"><span class="toc-number">2.4.</span> <span class="toc-text">反射机制原理图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">2.5.</span> <span class="toc-text">反射的应用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%88%E8%B0%88%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-number">2.6.</span> <span class="toc-text">谈谈反射机制的优缺点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84%E5%AE%9E%E6%88%98"><span class="toc-number">2.7.</span> <span class="toc-text">反射实战</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96-Class-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%9B%9B%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="toc-number">2.7.1.</span> <span class="toc-text">获取 Class 对象的四种方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">2.7.2.</span> <span class="toc-text">反射的一些基本操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%8C%E7%BB%93"><span class="toc-number">2.8.</span> <span class="toc-text">完结</span></a></li></ol></li></ol>
+        
+    </div>
+</aside>
+
+</header>
+
+        <div id="content" class="content">
+            <div id="wrapper" class="wrapper" style="max-width: 800px">
+                <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            3.8
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <a class="article-date" href="http://example.com/2023/03/08/%E6%AF%8F%E6%97%A5%E9%9D%A2%E8%AF%95%E9%A2%98/3.8/index.html">
+    
+    <i class="icon-calendar vm"></i>
+    
+    <time class="vm" datetime="2023-03-08T08:05:50.257Z" itemprop="datePublished">2023-03-08</time>
+</a>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/java%E5%8F%8D%E5%B0%84/" rel="tag">java反射</a>, <a class="article-tag-link" href="/tags/java%E5%9F%BA%E7%A1%80/" rel="tag">java基础</a>, <a class="article-tag-link" href="/tags/java%E5%BA%8F%E5%88%97%E5%8C%96/" rel="tag">java序列化</a>, <a class="article-tag-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">面试题</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <p><em><strong>坚持就是胜利！！！</strong></em></p>
+<span id="more"></span>
+
+<h1 id="1-java序列化"><a href="#1-java序列化" class="headerlink" title="1.java序列化"></a>1.java序列化</h1><p><a target="_blank" rel="noopener" href="https://javaguide.cn/java/basis/serialization.html#%E4%BB%80%E4%B9%88%E6%98%AF%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96">参考1</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1fh411y7R8/?spm_id_from=333.999.0.0">参考2</a></p>
+<h2 id="什么是序列化和反序列？"><a href="#什么是序列化和反序列？" class="headerlink" title="什么是序列化和反序列？"></a>什么是序列化和反序列？</h2><p>把对象持久化保存在文件中或在网络中传输对象等就要用到序列化，简单讲就是数据结构或对象与二进制字节流之间转换的过程。<br>常见应用场景：</p>
+<ul>
+<li>对象在网络传输（比如远程方法调用 RPC 的时候）之前需要先被序列化，接收到序列化的对象之后需要再反序列化；</li>
+<li>将对象存储到文件之前需要序列化，将对象从文件中读取出来需要反序列化；</li>
+<li>将对象存储到数据库（如 Redis）之前需要序列化，将对象从缓存数据库中读取出来反序列化；</li>
+<li>将对象存储到内存之前需要序列化，从内存中读取出来之后需要反序列化。</li>
+</ul>
+<p><em><strong>综上：序列化的主要目的是通过网络传输对象或者说是将对象存储到文件系统、数据库、内存中。</strong></em></p>
+<p><img src="/images/a478c74d-2c48-40ae-9374-87aacf05188c.png" alt="img"></p>
+<h2 id="序列化协议对应于-TCP-x2F-IP-4-层模型的哪一层？"><a href="#序列化协议对应于-TCP-x2F-IP-4-层模型的哪一层？" class="headerlink" title="序列化协议对应于 TCP&#x2F;IP 4 层模型的哪一层？"></a>序列化协议对应于 TCP&#x2F;IP 4 层模型的哪一层？</h2><p>我们知道网络通信的双方必须要采用和遵守相同的协议。TCP&#x2F;IP 四层模型是下面这样的，序列化协议属于哪一层呢？</p>
+<ol>
+<li>应用层</li>
+<li>传输层</li>
+<li>网络层</li>
+<li>网络接口层</li>
+</ol>
+<p><img src="/images/tcp-ip-4-model.png" alt="TCP/IP 四层模型"></p>
+<p>如上，OSI 七层协议模型中，表示层主要就是对应用层的用户数据进行处理转换为二进制流。反过来的话，就是将二进制流转换成应用层的用户数据。这就对应的序列化和反序列化。</p>
+<p>因为，OSI 七层协议模型中的应用层、表示层和会话层对应的都是 TCP&#x2F;IP 四层模型中的应用层，所以<em><strong>序列化协议属于 TCP&#x2F;IP 协议应用层的一部分。</strong></em></p>
+<h2 id="常见的序列化协议有哪些？"><a href="#常见的序列化协议有哪些？" class="headerlink" title="常见的序列化协议有哪些？"></a>常见的序列化协议有哪些？</h2><p>JDK 自带序列化方式一般不用 ，因为效率低并且安全问题。</p>
+<p>比较常用的序列化协议有 <em><strong>Hessian、Kryo、Protobuf、ProtoStuff</strong></em>，这些都是基于二进制的序列化协议。</p>
+<p>像 JSON 和 XML 这种属于文本类序列化方式。虽然可读性比较好，但是性能较差，一般不会选择。</p>
+<h3 id="JDK-自带的序列化方式"><a href="#JDK-自带的序列化方式" class="headerlink" title="JDK 自带的序列化方式"></a>JDK 自带的序列化方式</h3><p>JDK 自带序列化，只需实现 <code>java.io.Serializable</code>接口（没方法不需要复写）即可。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="meta">@Getter</span></span><br><span class="line"><span class="meta">@Builder</span></span><br><span class="line"><span class="meta">@ToString</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RpcRequest</span> <span class="keyword">implements</span> <span class="title class_">Serializable</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">long</span> <span class="variable">serialVersionUID</span> <span class="operator">=</span> <span class="number">1905122041950251207L</span>;</span><br><span class="line">    <span class="keyword">private</span> String requestId;</span><br><span class="line">    <span class="keyword">private</span> String interfaceName;</span><br><span class="line">    <span class="keyword">private</span> String methodName;</span><br><span class="line">    <span class="keyword">private</span> Object[] parameters;</span><br><span class="line">    <span class="keyword">private</span> Class&lt;?&gt;[] paramTypes;</span><br><span class="line">    <span class="keyword">private</span> RpcMessageTypeEnum rpcMes</span><br></pre></td></tr></table></figure>
+
+<h4 id="serialVersionUID有什么用？"><a href="#serialVersionUID有什么用？" class="headerlink" title="serialVersionUID有什么用？"></a>serialVersionUID有什么用？</h4><p>序列化号 <code>serialVersionUID</code> 属于版本控制的作用。反序列化时，会检查 <code>serialVersionUID</code> 是否和当前类的 <code>serialVersionUID</code> 一致。如果 <code>serialVersionUID</code> 不一致则会抛出 <code>InvalidClassException</code> 异常。强烈推荐每个序列化类都手动指定其 <code>serialVersionUID</code>，如果不手动指定，那么编译器会动态生成默认的 <code>serialVersionUID</code>。</p>
+<h4 id="serialVersion不是被-static-修饰了吗，为什么还会被“反序列化”？"><a href="#serialVersion不是被-static-修饰了吗，为什么还会被“反序列化”？" class="headerlink" title="serialVersion不是被 static 修饰了吗，为什么还会被“反序列化”？"></a>serialVersion不是被 static 修饰了吗，为什么还会被“反序列化”？</h4><p><code>static</code> 修饰的变量是静态变量，位于方法区，<em><strong>本身是不会被序列化的</strong></em>。 <code>static</code> 变量是属于类的而不是对象。你反序列之后，<code>static</code> 变量的值就像是默认赋予给了对象一样，看着就像是 <code>static</code> 变量被序列化，实际只是假象罢了。</p>
+<h4 id="如果有些字段不想进行序列化怎么办？"><a href="#如果有些字段不想进行序列化怎么办？" class="headerlink" title="如果有些字段不想进行序列化怎么办？"></a>如果有些字段不想进行序列化怎么办？</h4><p>用 <code>transient</code> 关键字修饰</p>
+<p>阻止实例中哪些被此修饰的子弹被序列化，反序列化时也不会被恢复。</p>
+<p>关于<code>transient</code>要注意的点：</p>
+<ul>
+<li><code>transient</code>只能修饰字段</li>
+<li><code>transient</code>修饰的字段，在反序列化时将会被置为类的默认值。如：如果是 <code>int</code>，反序列化结果是0.</li>
+<li><code>static</code>字段因为不属于任何对象，所以无论有没有被<code>transient</code>关键字修饰，均不会被序列化。</li>
+</ul>
+<h4 id="为什么不推荐使用JDK自带的序列化？"><a href="#为什么不推荐使用JDK自带的序列化？" class="headerlink" title="为什么不推荐使用JDK自带的序列化？"></a>为什么不推荐使用JDK自带的序列化？</h4><p>很少使用或几乎不使用，主要原因是：</p>
+<ul>
+<li>不支持跨语言调用：调用的是其他语言开发的服务的时候就不支持</li>
+<li>性能差：相对于，序列化之后的字节数组体积较大，导致传输成本加大</li>
+<li>安全问题</li>
+</ul>
+<h3 id="Kryo"><a href="#Kryo" class="headerlink" title="Kryo"></a>Kryo</h3><p>高性能的序列化&#x2F;反序列化工具，非常成熟的序列化实现，已在 Twitter、Groupon、Yahoo 以及多个著名开源项目（如 Hive、Storm）中广泛使用。</p>
+<ul>
+<li>变长存储特性</li>
+<li>字节码生成机制</li>
+<li>运行速度高</li>
+<li>较小的字节码体积。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Kryo serialization class, Kryo serialization efficiency is very high, but only compatible with Java language</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">KryoSerializer</span> <span class="keyword">implements</span> <span class="title class_">Serializer</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Because Kryo is not thread safe. So, use ThreadLocal to store Kryo objects</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ThreadLocal&lt;Kryo&gt; kryoThreadLocal = ThreadLocal.withInitial(() -&gt; &#123;</span><br><span class="line">        <span class="type">Kryo</span> <span class="variable">kryo</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Kryo</span>();</span><br><span class="line">        kryo.register(RpcResponse.class);</span><br><span class="line">        kryo.register(RpcRequest.class);</span><br><span class="line">        <span class="keyword">return</span> kryo;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">byte</span>[] serialize(Object obj) &#123;</span><br><span class="line">        <span class="keyword">try</span> (<span class="type">ByteArrayOutputStream</span> <span class="variable">byteArrayOutputStream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ByteArrayOutputStream</span>();</span><br><span class="line">             <span class="type">Output</span> <span class="variable">output</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Output</span>(byteArrayOutputStream)) &#123;</span><br><span class="line">            <span class="type">Kryo</span> <span class="variable">kryo</span> <span class="operator">=</span> kryoThreadLocal.get();</span><br><span class="line">            <span class="comment">// Object-&gt;byte:将对象序列化为byte数组</span></span><br><span class="line">            kryo.writeObject(output, obj);</span><br><span class="line">            kryoThreadLocal.remove();</span><br><span class="line">            <span class="keyword">return</span> output.toBytes();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">SerializeException</span>(<span class="string">&quot;Serialization failed&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> &lt;T&gt; T <span class="title function_">deserialize</span><span class="params">(<span class="type">byte</span>[] bytes, Class&lt;T&gt; clazz)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> (<span class="type">ByteArrayInputStream</span> <span class="variable">byteArrayInputStream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ByteArrayInputStream</span>(bytes);</span><br><span class="line">             <span class="type">Input</span> <span class="variable">input</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Input</span>(byteArrayInputStream)) &#123;</span><br><span class="line">            <span class="type">Kryo</span> <span class="variable">kryo</span> <span class="operator">=</span> kryoThreadLocal.get();</span><br><span class="line">            <span class="comment">// byte-&gt;Object:从byte数组中反序列化出对象</span></span><br><span class="line">            <span class="type">Object</span> <span class="variable">o</span> <span class="operator">=</span> kryo.readObject(input, clazz);</span><br><span class="line">            kryoThreadLocal.remove();</span><br><span class="line">            <span class="keyword">return</span> clazz.cast(o);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">SerializeException</span>(<span class="string">&quot;Deserialization failed&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Protobuf"><a href="#Protobuf" class="headerlink" title="Protobuf"></a>Protobuf</h3><p>Github 地址：<a target="_blank" rel="noopener" href="https://github.com/protocolbuffers/protobuf">https://github.com/protocolbuffers/protobufopen in new window</a></p>
+<h3 id="ProtoStuff"><a href="#ProtoStuff" class="headerlink" title="ProtoStuff"></a>ProtoStuff</h3><p>由于 Protobuf 的易用性，它的哥哥 Protostuff 诞生了。</p>
+<p>protostuff 基于 Google protobuf，但是提供了更多的功能和更简易的用法。虽然更加易用，但是不代表 ProtoStuff 性能更差。</p>
+<p>Github 地址：<a target="_blank" rel="noopener" href="https://github.com/protostuff/protostuff">https://github.com/protostuff/protostuffopen in new window</a>。</p>
+<h3 id="Hessian"><a href="#Hessian" class="headerlink" title="Hessian"></a>Hessian</h3><p>Hessian 是一个轻量级的，自定义描述的二进制 RPC 协议。Hessian 是一个比较老的序列化实现了，并且同样也是跨语言的。</p>
+<p><img src="https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2020-8/8613ec4c-bde5-47bf-897e-99e0f90b9fa3.png" alt="img"></p>
+<p>Dubbo2.x 默认启用的序列化方式是 Hessian2 ,但是，Dubbo 对 Hessian2 进行了修改，不过大体结构还是差不多。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Kryo 是专门针对 Java 语言序列化方式并且性能非常好，如果你的应用是专门针对 Java 语言的话可以考虑使用，并且 Dubbo 官网的一篇文章中提到说推荐使用 Kryo 作为生产环境的序列化方式。</p>
+<p><img src="https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2020-8/569e541a-22b2-4846-aa07-0ad479f07440.png" alt="img"></p>
+<p>像 Protobuf、 ProtoStuff、hessian 这类都是跨语言的序列化方式，如果有跨语言需求的话可以考虑使用。</p>
+<p>除了我上面介绍到的序列化方式的话，还有像 Thrift，Avro 这些。</p>
+<h1 id="2-java反射"><a href="#2-java反射" class="headerlink" title="2.java反射"></a>2.java反射</h1><p>[参考1](<a target="_blank" rel="noopener" href="https://javaguide.cn/java/basis/reflection.html">Java 反射机制详解 | JavaGuide(Java面试+学习指南)</a>)</p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1fh411y7R8/?spm_id_from=333.999.0.0">参考2</a></p>
+<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><ul>
+<li>根据properties等配置文件指定信息，创建对象并调用方法</li>
+<li>通过外部文件配置，在不修改源码情况下来控制程序，也符合设计模式的 OCP 原则（开闭原则：不修改源码，扩展功能）</li>
+</ul>
+<h2 id="何为反射？"><a href="#何为反射？" class="headerlink" title="何为反射？"></a>何为反射？</h2><p>反射之所以被称为框架的灵魂，主要是因为它赋予了我们在运行时分析类以及执行类中方法的能力。通过反射你可以获取任意一个类的所有属性和方法，你还可以调用这些方法和属性。</p>
+<h2 id="反射机制"><a href="#反射机制" class="headerlink" title="反射机制"></a>反射机制</h2><ol>
+<li>反射机制允许程序在执行期借助于ReflectionAPI取得任何类的内部信息(比如成员变量，构造器，成员方法等等),并能操作对象的属性及方法。反射在设计模式和框架底层都会用到。</li>
+<li>加载完类之后，在堆中就产生了一个Class类型的对象(一个类只有一个Class对象)，这个对象包含了类的完整结构信息。通过这个对象得到类的结构。这个Class对象就像一面镜子，透过这个镜子看到类的结构,所以,形象的称之为:反射。</li>
+</ol>
+<hr>
+<h3 id="反射及制造可以完成的任务："><a href="#反射及制造可以完成的任务：" class="headerlink" title="反射及制造可以完成的任务："></a>反射及制造可以完成的任务：</h3><ol>
+<li><em><strong>在运行时判断任意一个对象所属的类</strong></em></li>
+<li><em><strong>在运行时构造任意一个类的对象</strong></em></li>
+<li><em><strong>在运行时得到任意一个类所具有的成员变量和方法</strong></em></li>
+<li><em><strong>在运行时调用任意一个对象的成员变量和方法生成动态代理</strong></em></li>
+</ol>
+<hr>
+<h3 id="主要类（其中5和6是动态代理的核心）"><a href="#主要类（其中5和6是动态代理的核心）" class="headerlink" title="主要类（其中5和6是动态代理的核心）"></a>主要类（其中5和6是动态代理的核心）</h3><ol>
+<li>java.lang.<code>Class</code>:代表一个类，Class对象表示某个类加载后在堆中的对象</li>
+<li>java.lang.reflect.<code>Method</code>:代表类的方法, Method对象表示某个类的方法</li>
+<li>java.lang.reflect.<code>Field</code>:代表类的成员变量, Field对象表示某个类的成员变量</li>
+<li>java.lang.reflect.<code>Constructor</code>:代表类的构造方法,Constructor对象表示构造器</li>
+<li>java.lang.reflect.<code>InvocationHandler</code>:</li>
+<li>java.lang.reflect.<code>Proxy</code>:</li>
+</ol>
+<h2 id="反射机制原理图"><a href="#反射机制原理图" class="headerlink" title="反射机制原理图"></a>反射机制原理图</h2><p><img src="/images/image-20230309122603621.png" alt="image-20230309122603621"></p>
+<h2 id="反射的应用场景"><a href="#反射的应用场景" class="headerlink" title="反射的应用场景"></a>反射的应用场景</h2><p>像 Spring&#x2F;Spring Boot、MyBatis 等等框架中都大量使用了反射机制。</p>
+<p><strong>这些框架中也大量使用了动态代理，而动态代理的实现也依赖反射。</strong></p>
+<p>比如下面是通过 JDK 实现动态代理的示例代码，其中就使用了反射类 <code>Method</code> 来调用指定的方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DebugInvocationHandler</span> <span class="keyword">implements</span> <span class="title class_">InvocationHandler</span> &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 代理类中的真实对象</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Object target;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">DebugInvocationHandler</span><span class="params">(Object target)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.target = target;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> InvocationTargetException, IllegalAccessException &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;before method &quot;</span> + method.getName());</span><br><span class="line">        <span class="type">Object</span> <span class="variable">result</span> <span class="operator">=</span> method.invoke(target, args);</span><br><span class="line">        System.out.println(<span class="string">&quot;after method &quot;</span> + method.getName());</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>另外，像 Java 中的一大利器 <strong>注解</strong> 的实现也用到了反射。为什么你使用 Spring 的时候 ，一个<code>@Component</code>注解就声明了一个类为 Spring Bean 呢？为什么你通过一个 <code>@Value</code>注解就读取到配置文件中的值呢？究竟是怎么起作用的呢？</p>
+<p>这些都是因为你可以基于反射分析类，然后获取到类&#x2F;属性&#x2F;方法&#x2F;方法的参数上的注解。你获取到注解之后，就可以做进一步的处理。</p>
+<h2 id="谈谈反射机制的优缺点"><a href="#谈谈反射机制的优缺点" class="headerlink" title="谈谈反射机制的优缺点"></a>谈谈反射机制的优缺点</h2><p><strong>优点</strong> ： 使代码更加灵活、使各种框架提供开箱即用的功能</p>
+<p><strong>缺点</strong> ：安全问题。比如可以无视泛型参数的安全检查（泛型参数的安全检查发生在编译时）。另外，反射的性能也要稍差点，不过，对于框架来说实际是影响不大的。</p>
+<p>相关阅读：<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/1392351/java-reflection-why-is-it-so-slow">Java Reflection: Why is it so slow?open in new window</a></p>
+<h2 id="反射实战"><a href="#反射实战" class="headerlink" title="反射实战"></a>反射实战</h2><h3 id="获取-Class-对象的四种方式"><a href="#获取-Class-对象的四种方式" class="headerlink" title="获取 Class 对象的四种方式"></a>获取 Class 对象的四种方式</h3><p>如果我们动态获取到这些信息，我们需要依靠 Class 对象。Class 类对象将一个类的方法、变量等信息告诉运行的程序。Java 提供了四种方式获取 Class 对象:</p>
+<p><strong>1. 知道具体类的情况下可以使用：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Class</span> <span class="variable">alunbarClass</span> <span class="operator">=</span> TargetObject.class;</span><br></pre></td></tr></table></figure>
+
+<p>但是我们一般是不知道具体类的，基本都是通过遍历包下面的类来获取 Class 对象，通过此方式获取 Class 对象不会进行初始化</p>
+<p><strong>2. 通过 <code>Class.forName()</code>传入类的全路径获取：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Class</span> <span class="variable">alunbarClass1</span> <span class="operator">=</span> Class.forName(<span class="string">&quot;cn.javaguide.TargetObject&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>3. 通过对象实例<code>instance.getClass()</code>获取：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">TargetObject</span> <span class="variable">o</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TargetObject</span>();</span><br><span class="line"><span class="type">Class</span> <span class="variable">alunbarClass2</span> <span class="operator">=</span> o.getClass();</span><br></pre></td></tr></table></figure>
+
+<p><strong>4. 通过类加载器<code>xxxClassLoader.loadClass()</code>传入类路径获取:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ClassLoader.getSystemClassLoader().loadClass(<span class="string">&quot;com.wzk.TargetObject&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>通过类加载器获取 Class 对象不会进行初始化，意味着不进行包括初始化等一系列步骤，静态代码块和静态对象不会得到执行</p>
+<h3 id="反射的一些基本操作"><a href="#反射的一些基本操作" class="headerlink" title="反射的一些基本操作"></a>反射的一些基本操作</h3><ol>
+<li>创建一个我们要使用反射操作的类 <code>TargetObject</code>。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.javaguide;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TargetObject</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String value;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">TargetObject</span><span class="params">()</span> &#123;</span><br><span class="line">        value = <span class="string">&quot;JavaGuide&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">publicMethod</span><span class="params">(String s)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;I love &quot;</span> + s);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">privateMethod</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;value is &quot;</span> + value);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>使用反射操作这个类的方法以及参数</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.javaguide;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationTargetException;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchFieldException &#123;</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 获取 TargetObject 类的 Class 对象并且创建 TargetObject 类实例</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        Class&lt;?&gt; targetClass = Class.forName(<span class="string">&quot;cn.javaguide.TargetObject&quot;</span>);</span><br><span class="line">        <span class="type">TargetObject</span> <span class="variable">targetObject</span> <span class="operator">=</span> (TargetObject) targetClass.newInstance();</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 获取 TargetObject 类中定义的所有方法</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        Method[] methods = targetClass.getDeclaredMethods();</span><br><span class="line">        <span class="keyword">for</span> (Method method : methods) &#123;</span><br><span class="line">            System.out.println(method.getName());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 获取指定方法并调用</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="type">Method</span> <span class="variable">publicMethod</span> <span class="operator">=</span> targetClass.getDeclaredMethod(<span class="string">&quot;publicMethod&quot;</span>,</span><br><span class="line">                String.class);</span><br><span class="line"></span><br><span class="line">        publicMethod.invoke(targetObject, <span class="string">&quot;JavaGuide&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 获取指定参数并对参数进行修改</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="type">Field</span> <span class="variable">field</span> <span class="operator">=</span> targetClass.getDeclaredField(<span class="string">&quot;value&quot;</span>);</span><br><span class="line">        <span class="comment">//为了对类中的参数进行修改我们取消安全检查</span></span><br><span class="line">        field.setAccessible(<span class="literal">true</span>);</span><br><span class="line">        field.set(targetObject, <span class="string">&quot;JavaGuide&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 调用 private 方法</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="type">Method</span> <span class="variable">privateMethod</span> <span class="operator">=</span> targetClass.getDeclaredMethod(<span class="string">&quot;privateMethod&quot;</span>);</span><br><span class="line">        <span class="comment">//为了调用private方法我们取消安全检查</span></span><br><span class="line">        privateMethod.setAccessible(<span class="literal">true</span>);</span><br><span class="line">        privateMethod.invoke(targetObject);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出内容：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">publicMethod</span><br><span class="line">privateMethod</span><br><span class="line">I love JavaGuide</span><br><span class="line">value is JavaGuide</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong> : 有读者提到上面代码运行会抛出 <code>ClassNotFoundException</code> 异常,具体原因是你没有下面把这段代码的包名替换成自己创建的 <code>TargetObject</code> 所在的包 。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class&lt;?&gt; targetClass = Class.forName(<span class="string">&quot;cn.javaguide.TargetObject&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="完结"><a href="#完结" class="headerlink" title="完结"></a>完结</h2>
+        
+    </section>
+</article>
+
+
+
+<div class="comments">
+    <div id="comments"></div>
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+    new Gitalk({
+        clientID: "7fbe80427f54741e289f",
+        clientSecret: "f34ed5fd92e54c9000bd37ba951948cb939deff5",
+        repo: "icode-wild-cat.github.io",
+        owner: "sanonz",
+        admin: ["sanonz"],
+        id: "8cef6447886d7508074e38dcb1356d8b",
+        distractionFreeMode: true,
+        title: "3.8",
+        body: "http://example.com/2023/03/08/%E6%AF%8F%E6%97%A5%E9%9D%A2%E8%AF%95%E9%A2%98/3.8/",
+        labels: ["面试题","java基础","java序列化","java反射"]
+    }).render('comments');
+    </script>
+</div>
+
+
+
+            </div>
+        </div>
+
+        
+            
+            <a id="pagenext" href="/2023/03/08/Servlet/" class="article-next" title="Servlet"><i class="icon-arrow-right"></i></a>
+            
+            
+            <a id="pageprev" href="/2023/03/09/%E6%AF%8F%E6%97%A5%E9%9D%A2%E8%AF%95%E9%A2%98/3.9/" class="article-prev" title="3.9"><i class="icon-arrow-left"></i></a>
+            
+        
+
+        <footer class="footer">
+    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, Theme by <a href="https://github.com/sanonz/hexo-theme-concise" target="_blank">Concise</a>
+
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?e4027971a230b210f4671f485b33846a";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    
+</footer>
+
+    </main>
+
+    <script type="text/javascript" src="https://unpkg.com/jquery@1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        var nodes = {
+            nav: $('#nav'),
+            aside: $('#aside'),
+            asideInner: $('#aside-inner'),
+            navInner: $('#nav-inner')
+        };
+
+        var doing = false;
+        nodes.asideInner.on('webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', function() {
+            if (nodes.aside.hasClass('mobile-open')) {
+                nodes.aside.removeClass('mobile-open');
+            } else {
+                nodes.aside.removeClass('mobile-close panel-show');
+            }
+            doing = false;
+        });
+        $('#open-panel, #aside-mask').on('click', function() {
+            if (doing) {
+                return;
+            }
+
+            if (nodes.aside.hasClass('panel-show')) {
+                nodes.aside.addClass('mobile-close');
+            } else {
+                nodes.aside.addClass('mobile-open panel-show');
+            }
+        });
+        $('#open-menus').on('click', function() {
+            nodes.navInner.slideToggle('normal', slideDone);
+        });
+
+        if (window.innerWidth <= 960) {
+            setTimeout(function() {
+                nodes.navInner.slideUp('normal', slideDone);
+            }, 3000);
+        }
+
+        function slideDone() {
+            if (nodes.navInner.css('display') !== 'none') {
+                nodes.navInner.css('display', '');
+            }
+        }
+
+        $(window).on('resize', function() {
+            if ($(this).width() > 960) {
+                nodes.navInner.css('display', '');
+            }
+        });
+    });
+    </script>
+    
+        
+<script src="/js/scrollspy.min.js"></script>
+
+        <script type="text/javascript">
+        $(document.body).scrollspy({target: '#aside-inner'});
+
+        $(window).on('resize', function() {
+            var hw = $('#header').width();
+            var ww = $('#wrapper').width();
+            var space = ($(this).width() - hw - ww) / 2 / 2;
+
+            var pageprev = $('#pageprev');
+            var pagenext = $('#pagenext');
+            var avg = (pageprev.width() + pagenext.width()) / 2
+
+            if(space > avg) {
+                var len = space - avg / 2;
+                var styles = {position: 'fixed', top: '50%', marginTop: - (pageprev.width() + pagenext.width()) / 4}
+                pageprev.css($.extend({left: hw + len}, styles));
+                pagenext.css($.extend({right: len}, styles));
+            } else {
+                pageprev.removeAttr('style');
+                pagenext.removeAttr('style');
+            }
+        }).trigger('resize');
+        </script>
+    
+
+</body>
+</html>
