@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-03-12T14:03:58.524Z</updated>
+  <updated>2023-03-13T04:37:38.604Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,24 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>408大纲</title>
+    <link href="http://example.com/2023/03/13/408%E5%A4%A7%E7%BA%B2/"/>
+    <id>http://example.com/2023/03/13/408%E5%A4%A7%E7%BA%B2/</id>
+    <published>2023-03-13T04:20:09.431Z</published>
+    <updated>2023-03-13T04:37:38.604Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;经过半年的java学习，发现看机构的教程已不能够很好提升自身水平了；也经过半年的学习，对编程和计算机有了0到1的认知突破，接下来到了沉下心来系统复习和大量阅读书籍的时候了，也希望自己能够真正沉下心来去以终为始地面对不久将到来的面试，要每天保持像是正在面试一样的状态，时不待人，时不待我！！！&lt;/p&gt;
+&lt;p&gt;内容收录了408的考研大纲，以便408学习参考。以考研大纲来要求自己学习408内容来提高计算机能力和面试能力。看面试八股短期快且高效但是不能究408其本质，按大纲学习可以全面广泛地提升对其在认知上成效，所以要放下眼前的短平快的现成八股，去真心地按408考研大纲阅读408经典书籍。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="408大纲" scheme="http://example.com/tags/408%E5%A4%A7%E7%BA%B2/"/>
+    
+  </entry>
   
   <entry>
     <title>DodgeWildCat&#39;s photograph album</title>
@@ -137,6 +155,19 @@
   </entry>
   
   <entry>
+    <title></title>
+    <link href="http://example.com/2023/03/11/%E6%95%B0%E6%8D%AE%E5%BA%93/SQL%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    <id>http://example.com/2023/03/11/%E6%95%B0%E6%8D%AE%E5%BA%93/SQL%E6%95%B0%E6%8D%AE%E5%BA%93/</id>
+    <published>2023-03-11T15:41:15.486Z</published>
+    <updated>2023-03-11T15:41:39.494Z</updated>
+    
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>数据库基础和原理</title>
     <link href="http://example.com/2023/03/11/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80%E5%92%8C%E5%8E%9F%E7%90%86/"/>
     <id>http://example.com/2023/03/11/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80%E5%92%8C%E5%8E%9F%E7%90%86/</id>
@@ -154,19 +185,6 @@
     
     
     <category term="数据库" scheme="http://example.com/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    
-  </entry>
-  
-  <entry>
-    <title></title>
-    <link href="http://example.com/2023/03/11/%E6%95%B0%E6%8D%AE%E5%BA%93/SQL%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    <id>http://example.com/2023/03/11/%E6%95%B0%E6%8D%AE%E5%BA%93/SQL%E6%95%B0%E6%8D%AE%E5%BA%93/</id>
-    <published>2023-03-11T15:41:15.486Z</published>
-    <updated>2023-03-11T15:41:39.494Z</updated>
-    
-    
-    
-    
     
   </entry>
   

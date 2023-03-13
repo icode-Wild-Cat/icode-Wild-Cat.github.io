@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+
+    
+
+    
+
+    <title>408大纲 | DodgeWildCat&#39;s Blog</title>
+    <meta name="author" content="John Doe" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="经过半年的java学习，发现看机构的教程已不能够很好提升自身水平了；也经过半年的学习，对编程和计算机有了0到1的认知突破，接下来到了沉下心来系统复习和大量阅读书籍的时候了，也希望自己能够真正沉下心来去以终为始地面对不久将到来的面试，要每天保持像是正在面试一样的状态，时不待人，时不待我！！！内容收录了408的考研大纲，以便408学习参考。以考研大纲来要求自己学习408内容来提高计算机能力和面试能力。看面试八股短期快且高效但是不能究408其本质，按大纲学习可以全面广泛地提升对其在认知上成效，所以要放" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+
+    
+    <link rel="alternate" href="/atom.xml" title="DodgeWildCat&#39;s Blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/images/favicon.ico">
+    
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'icomoon';
+        src: url("/fonts/icomoon.eot?q628ml");
+        src: url("/fonts/icomoon.eot?q628ml#iefix") format('embedded-opentype'),
+             url("/fonts/icomoon.ttf?q628ml") format('truetype'),
+             url("/fonts/icomoon.woff?q628ml") format('woff'),
+             url("/fonts/icomoon.svg?q628ml#icomoon") format('svg');
+        font-weight: normal;
+        font-style: normal;
+    }
+    </style>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!--[if lt IE 9]><style type="text/css">.nav-inner {top:0;}.author-meta {position:static;top:0;}.search-form {height:36px;}</style><script type="text/javascript" src="https://unpkg.com/html5shiv@3.7.3/dist/html5shiv.min.js"></script><![endif]-->
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+
+    <main class="app">
+        <header id="header" class="header clearfix">
+    <div id="nav" class="nav">
+    <div class="nav-mobile">
+        <button id="open-panel" class="open-panel nav-mobile-item"><i class="icon-documents"></i></button>
+        <h1 class="nav-mobile-title nav-mobile-item">DodgeWildCat&#39;s Blog</h1>
+        <button id="open-menus" class="open-panel nav-mobile-item"><i class="icon-library"></i></button>
+    </div>
+
+    <nav id="nav-inner" class="nav-inner">
+        
+            <a class="nav-item" href="/">
+                <span class="nav-text">首页</span>
+            </a>
+        
+            <a class="nav-item" href="/categories/mech">
+                <span class="nav-text">机械</span>
+            </a>
+        
+            <a class="nav-item" href="/categories/srccode">
+                <span class="nav-text">源码系列</span>
+            </a>
+        
+            <a class="nav-item" href="/categories/back-end">
+                <span class="nav-text">后端</span>
+            </a>
+        
+            <a class="nav-item" href="/categories/front-end">
+                <span class="nav-text">前端</span>
+            </a>
+        
+            <a class="nav-item" href="/categories/ss">
+                <span class="nav-text">社科</span>
+            </a>
+        
+            <a class="nav-item" href="/categories/art">
+                <span class="nav-text">Art</span>
+            </a>
+        
+            <a class="nav-item" href="/categories/studymind">
+                <span class="nav-text">学习思想</span>
+            </a>
+        
+            <a class="nav-item" href="/tags">
+                <span class="nav-text">标签</span>
+            </a>
+        
+            <a class="nav-item" href="/archives">
+                <span class="nav-text">归档</span>
+            </a>
+        
+            <a class="nav-item" href="/atom.xml">
+                <span class="nav-text">订阅</span>
+            </a>
+        
+            <a class="nav-item" href="/about">
+                <span class="nav-text">关于</span>
+            </a>
+        
+    </nav>
+</div>
+
+    <aside id="aside" class="aside">
+    <div id="aside-mask" class="aside-mask"></div>
+    <div id="aside-inner" class="aside-inner">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"><i class="icon-search-stroke"></i></button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+
+        
+        
+        
+        
+
+        
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Part-1%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-number">1.</span> <span class="toc-text">Part 1：数据结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Part-2%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">Part 2：计算机组成原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Part-3%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="toc-number">3.</span> <span class="toc-text">Part 3：操作系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Part-4%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C"><span class="toc-number">4.</span> <span class="toc-text">Part 4：计算机网络</span></a></li></ol>
+        
+    </div>
+</aside>
+
+</header>
+
+        <div id="content" class="content">
+            <div id="wrapper" class="wrapper" style="max-width: 800px">
+                <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            408大纲
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <a class="article-date" href="http://example.com/2023/03/13/408%E5%A4%A7%E7%BA%B2/index.html">
+    
+    <i class="icon-calendar vm"></i>
+    
+    <time class="vm" datetime="2023-03-13T04:20:09.431Z" itemprop="datePublished">2023-03-13</time>
+</a>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/408%E5%A4%A7%E7%BA%B2/" rel="tag">408大纲</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <p>经过半年的java学习，发现看机构的教程已不能够很好提升自身水平了；也经过半年的学习，对编程和计算机有了0到1的认知突破，接下来到了沉下心来系统复习和大量阅读书籍的时候了，也希望自己能够真正沉下心来去以终为始地面对不久将到来的面试，要每天保持像是正在面试一样的状态，时不待人，时不待我！！！</p>
+<p>内容收录了408的考研大纲，以便408学习参考。以考研大纲来要求自己学习408内容来提高计算机能力和面试能力。看面试八股短期快且高效但是不能究408其本质，按大纲学习可以全面广泛地提升对其在认知上成效，所以要放下眼前的短平快的现成八股，去真心地按408考研大纲阅读408经典书籍。</p>
+<span id="more"></span>
+
+<h3 id="Part-1：数据结构"><a href="#Part-1：数据结构" class="headerlink" title="Part 1：数据结构"></a><strong>Part 1：数据结构</strong></h3><p><strong>【数据结构】——【考查目标】</strong></p>
+<ul>
+<li><strong>1. 掌握数据结构的基本概念、基本原理和基本方法。</strong></li>
+<li><strong>2. 掌握数据的逻辑结构、存储结构及基本操作的实现，能够对算法进行基本的时间复杂度与空间复杂度的分析。</strong></li>
+<li><strong>3. 能够运用数据结构基本原理和方法进行问题的分析与求解，具备采用C或C++语言设计与实现算法的能力。</strong></li>
+</ul>
+<p><img src="https://pic1.zhimg.com/80/v2-2bfab481d3d74a9c461ded95ebc68bec_720w.webp" alt="img"></p>
+<p>数据结构-1</p>
+<p><strong>一、线性表</strong></p>
+<blockquote>
+<p><strong>(一) 线性表的基本概念</strong><br><strong>(二) 线性表的实现</strong><br><strong>1 顺序存储</strong><br><strong>⒉ 链式存储</strong><br><strong>(三) 线性表的应用</strong></p>
+</blockquote>
+<p><img src="https://pic2.zhimg.com/80/v2-b865e8f68fe3830a668d350c60a5dc81_720w.webp" alt="img"></p>
+<p>数据结构-2</p>
+<p><strong>二、栈、队列和数组</strong></p>
+<blockquote>
+<p><strong>(一)栈和队列的基本概念</strong><br><strong>(二)栈和队列的顺序存储结构</strong><br><strong>(三)栈和队列的链式存储结构</strong><br><strong>(四)多维数组的存储</strong><br><strong>(五)特殊矩阵的压缩存储</strong><br><strong>(六)栈、队列和数组的应用</strong></p>
+</blockquote>
+<p><img src="https://pic1.zhimg.com/80/v2-223912b17addf8d776f05becb290239c_720w.webp" alt="img"></p>
+<p>数据结构-3</p>
+<p><strong>三、树与二叉树</strong></p>
+<blockquote>
+<p><strong>(一) 树的基本概念</strong><br><strong>(二) 二叉树</strong><br><strong>1. 二叉树的定义及其主要特征</strong><br><strong>2. 二叉树的顺序存储结构和链式存储结构</strong><br><strong>3. 二叉树的遍历</strong><br><strong>4. 线索二叉树的基本概念和构造</strong><br><strong>(三) 树、森林</strong><br><strong>树的存储结构</strong><br><strong>⒉.森林与二叉树的转换</strong><br><strong>3. 树和森林的遍历(四)树与二叉树的应用</strong><br><strong>(1) 哈夫曼(Huffman)树和哈夫曼编码</strong><br><strong>(2) 并查集及其应用</strong></p>
+</blockquote>
+<p><img src="https://pic2.zhimg.com/80/v2-ad21980154ad5fac4390532d6c31bae9_720w.webp" alt="img"></p>
+<p>数据结构-4</p>
+<p><strong>四、图</strong></p>
+<blockquote>
+<p><strong>(一) 图的基本概念</strong><br><strong>(二) 图的存储及基本操作</strong><br><strong>1. 邻接矩阵法</strong><br><strong>2. 邻接表法</strong><br><strong>3. 邻接多重表、十字链表</strong><br><strong>（三）图的遍历</strong><br><strong>1. 深度优先搜索</strong><br><strong>2. 广度优先搜索</strong><br><strong>（四）图的基本应用</strong><br><strong>1. 最小(代价)生成树</strong><br><strong>2. 最短路径</strong><br><strong>3. 拓扑排序</strong><br><strong>4. 关键路径五、查找</strong><br><strong>（一）查找的基本概念</strong><br><strong>（二) 顺序查找法</strong><br><strong>（三）分块查找法</strong><br><strong>（四）折半查找法</strong><br><strong>(五)B树及其基本操作、B+树的基本概念</strong><br><strong>(六)散列(Hash)表</strong><br><strong>(七)树型查找</strong><br><strong>1. 二叉搜索树</strong><br><strong>2. 平衡二叉树</strong><br><strong>3. 红黑树六、排序</strong></p>
+</blockquote>
+<p><img src="https://pic2.zhimg.com/80/v2-fb9a54bf5e6c86cde651653942de2011_720w.webp" alt="img"></p>
+<p>数据结构-5</p>
+<p><img src="https://pic1.zhimg.com/80/v2-abaa786c67c39c56404cf30fa3e236b8_720w.webp" alt="img"></p>
+<p>数据结构-6</p>
+<p><strong>六、排序</strong></p>
+<blockquote>
+<p><strong>(一) 排序的基本概念</strong><br><strong>(二) 插入排序</strong><br><strong>1. 直接插入排序</strong><br><strong>⒉.折半插入排序</strong><br><strong>(三) 气泡排序(bubble sort)</strong><br><strong>(四) 简单选择排序</strong><br><strong>(五) 希尔排序(shell sort)</strong><br><strong>(六) 快速排序</strong><br><strong>(七) 堆排序</strong><br><strong>(八) 二路归并排序(merge sort)</strong><br><strong>(九) 基数排序</strong><br><strong>(十) 外部排序</strong><br><strong>(十一) 排序算法的分析与应用</strong></p>
+</blockquote>
+<p><img src="https://pic4.zhimg.com/80/v2-468e935e80353dd3b2304a16eaba9107_720w.webp" alt="img"></p>
+<p>数据结构-7</p>
+<hr>
+<h3 id="Part-2：计算机组成原理"><a href="#Part-2：计算机组成原理" class="headerlink" title="Part 2：计算机组成原理"></a><strong>Part 2：计算机组成原理</strong></h3><p><strong>【计算机组成原理】——【考查目标】</strong></p>
+<ul>
+<li><strong>1. 理解单处理器计算机系统中各部件的内部工作原理、组成结构以及相互连接方式，具有完整的计算机系统的整机概念。</strong></li>
+<li><strong>2. 理解计算机系统层次化结构概念，熟悉硬件与软件之间的界面，掌握指令集体系结构的基本知识和基本实现方法。</strong></li>
+<li><strong>3. 能够综合运用计算机组成的基本原理和基本方法，对有关计算机硬件系统中的理论和实际问题进行计算、分析，对一些基本部件进行简单设计;并能对高级程序设计语言(如C语言)中的相关问题进行分析。</strong></li>
+</ul>
+<p><img src="https://pic1.zhimg.com/80/v2-ea64ec93eb26dcc019480391830630bc_720w.webp" alt="img"></p>
+<p>计算机组成原理-1</p>
+<p><strong>一、计算机系统概述</strong></p>
+<blockquote>
+<p><strong>(一) 计算机系统层次结构</strong><br><strong>1. 计算机系统的基本组成</strong><br><strong>2. 计算机硬件的基本结构</strong><br><strong>3. 计算机软件和硬件的关系</strong><br><strong>4. 计算机系统的工作原理“存储程序”工作方式，高级语言程序与机器语言程序之间的转换,程序和指令的执行过程</strong><br><strong>(二)计算机性能指标</strong><br><strong>吞吐量、响应时间;CPU时钟周期、主频、CPI、CPU执行时间;</strong><br><strong>MIPS、MFLOPS 、GFLOPS、TFLOPS、PFLOPS、EFLOPS、ZFLOPS。</strong></p>
+</blockquote>
+<p><img src="https://pic4.zhimg.com/80/v2-5923ca166dd341006708d142f0dca5bb_720w.webp" alt="img"></p>
+<p>计算机组成原理-2</p>
+<p><strong>二、数据的表示和运算</strong></p>
+<blockquote>
+<p><strong>(一) 数制与编码</strong><br><strong>1. 进位计数制及其相互转换</strong><br><strong>2. 真值和机器数</strong><br><strong>3. 字符与字符串</strong><br><strong>(二) 定点数的表示和运算</strong><br><strong>1. 定点数的表示无符号数的表示;有符号整数的表示。</strong><br><strong>2. 定点数的运算</strong><br><strong>定点数的位移运算; 原码定点数的加减运算; 补码定点数的加&#x2F;减运算; 定点数的乘&#x2F;除运算; 溢出概念和判别方法。</strong><br><strong>(三) 浮点数的表示和运算</strong><br><strong>1. 浮点数的表示IEEE 754标准</strong><br><strong>2. 浮点数的加&#x2F;减运算</strong><br><strong>(四) 运算方法和运算电路【表述变更】</strong><br><strong>1. 基本运算部件:加法器、算数逻辑部件ALU</strong><br><strong>⒉.减法运算:补码加减运算器，标志位的生成</strong><br><strong>3. 乘除运算:乘除运算的基本原理，乘除发电路的基本结构</strong></p>
+</blockquote>
+<p><img src="https://pic4.zhimg.com/80/v2-24c3224942de5decabce357ee692ba13_720w.webp" alt="img"></p>
+<p>计算机组成原理-3</p>
+<p><strong>三、存储器层次结构</strong></p>
+<blockquote>
+<p><strong>(一) 存储器的分类</strong><br><strong>(二) 层次化存储器的的基本结构</strong><br><strong>(三) 半导体随机存取存储器</strong><br><strong>1. SRAM存储器</strong><br><strong>2. DRAM存储器</strong><br><strong>3. Flash 存储器</strong><br><strong>(四) 主存储器</strong><br><strong>1. DRAM芯片和内存条</strong><br><strong>2. 多模块存储器</strong><br><strong>3. 主存和CPU之间的连接</strong><br><strong>(五) 外部存储器</strong><br><strong>1. 磁盘存储器</strong><br><strong>2. 固态硬盘(SSD)</strong><br><strong>(六) 高速缓冲存储器(Cache)</strong><br><strong>1. Cache 的基本工作原理</strong><br><strong>2. Cache和主存之间的映射方式</strong><br><strong>3. Cache 中主存块的替换算法</strong><br><strong>4. Cache 写策略</strong><br><strong>(七) 虚拟存储器</strong><br><strong>1. 虚拟存储器的基本概念</strong><br><strong>2. 页式虚拟存储器基本原理，页表，地址转换，TLB(快表)。</strong><br><strong>3. 段式虚拟存储器</strong><br><strong>4. 段页式虚拟存储器</strong></p>
+</blockquote>
+<p><img src="https://pic1.zhimg.com/80/v2-23578321b209c3411b23c8bc422199f0_720w.webp" alt="img"></p>
+<p>计算机组成原理-4</p>
+<p><strong>四、指令系统</strong></p>
+<blockquote>
+<p><strong>(一) 指令系统的基本概念</strong><br><strong>(二) 指令格式</strong><br><strong>(三) 寻址方式</strong><br><strong>(四) 数据的对齐和大&#x2F;小端存放方式</strong><br><strong>(五) CISC和RISC的基本概念</strong><br><strong>(六) 高级语言程字与机器级代码之间的对应</strong><br><strong>1. 编译器、汇编器和链接器的基本概念</strong><br><strong>2. 选择结构语句的机器级表示</strong><br><strong>3. 循环结构语句的机器级表示</strong><br><strong>4. 过程(函数)调用对应的机器级表示</strong></p>
+</blockquote>
+<p><img src="https://pic2.zhimg.com/80/v2-0c28ec86ad2e677f95120a9309f9c76d_720w.webp" alt="img"></p>
+<p>计算机组成原理-5</p>
+<p><img src="https://pic2.zhimg.com/80/v2-45586ad9246f8c54a900cfc552aac025_720w.webp" alt="img"></p>
+<p>计算机组成原理-6</p>
+<p><strong>五、中央处理器(CPU)</strong></p>
+<blockquote>
+<p><strong>(一) CPU的功能和基本结构</strong><br><strong>(二) 指令执行过程</strong><br><strong>(三) 数据通路的功能和基本结构</strong><br><strong>(四) 控制器的功能和工作原理</strong><br><strong>1、硬布线控制器</strong><br><strong>2、微程序控制器微程序、微指令和微命令 ;微指令的编码方式; 微地址的形式方式。</strong><br><strong>(五) 异常和中断机制</strong><br><strong>1. 异常和中断的基本概念</strong><br><strong>2. 异常和中断的分类</strong><br><strong>3. 异常和中断的检测与响应</strong><br><strong>(六) 指令流水线</strong><br><strong>1、指令流水线的基本概念</strong><br><strong>2、指令流水线的基本实现</strong><br><strong>3.、结构冒险、数据冒险和控制冒险的处理4.超标量和动态流水线的基本概念</strong><br><strong>(七) 多处理器基本概念</strong><br><strong>1、SISD、SIMD、MIMD、向量处理器的基本概念</strong><br><strong>2、硬件多线程的基本概念</strong><br><strong>3、多核处理器(multi-core)的基本概念</strong><br><strong>4、共享内存多处理器(SMP)的基本概念</strong></p>
+</blockquote>
+<p><img src="https://pic2.zhimg.com/80/v2-d64e3ca45f938c7d82671875c8d4f329_720w.webp" alt="img"></p>
+<p>计算机组成原理-7</p>
+<p><strong>六、总线和输出输出系统</strong></p>
+<blockquote>
+<p><strong>（一）总线概述</strong><br><strong>1、总线的基本概念</strong><br><strong>2、总线的组成及性能指标</strong><br><strong>3、总线事务和定时</strong><br><strong>(二) I&#x2F;O接口(I&#x2F;O控制器)</strong><br><strong>1、I&#x2F;O接口的功能和基本结构</strong><br><strong>2、I&#x2F;O端口及其编址</strong><br><strong>(三) I&#x2F;O方式</strong><br><strong>1、程序查询方式</strong><br><strong>2、程序中断方式中断的基本概念; 中断响应过程; 中断处理过程; 多重中断和中断屏蔽的概念。</strong><br><strong>3、DMA方式</strong><br><strong>DMA 控制器的组成，DMA传送过程。</strong></p>
+</blockquote>
+<p><img src="https://pic4.zhimg.com/80/v2-8adf5eb974670166a18cb932b447c2eb_720w.webp" alt="img"></p>
+<p>计算机组成原理-8</p>
+<hr>
+<h3 id="Part-3：操作系统"><a href="#Part-3：操作系统" class="headerlink" title="Part 3：操作系统"></a>Part 3：操作系统</h3><p><strong>【操作系统】——【考查目标】</strong></p>
+<ul>
+<li><strong>1. 握操作系统的基本概念、基本原理和基本功能，理解操作系统的整体运行过程。</strong></li>
+<li><strong>2. 掌握操作系统进程、内存、文件和I&#x2F;O管理的策略、算法、机制以及相互关系。</strong></li>
+<li><strong>3. 能够运用所学的操作系统原理、方法与技术分析问题和解决问题，并能利用C语言描述相关算法。</strong></li>
+</ul>
+<p><img src="https://pic1.zhimg.com/80/v2-200300c8dc72cdca660c82a1315fbc54_720w.webp" alt="img"></p>
+<p>操作系统-1</p>
+<p><strong>一、操作系统概述</strong></p>
+<blockquote>
+<p><strong>(一) 操作系统的基本概念</strong><br><strong>(二) 操作系统的发展</strong><br><strong>(三) 程序运行环境</strong><br><strong>1. CPU运行模式内核模式，用户模式</strong><br><strong>2. 中断和异常的处理</strong><br><strong>3. 系统调用</strong><br><strong>4. 程序的链接与装入</strong><br><strong>5. 程序运行时内存映像与地址空间</strong><br><strong>(四) 操作系统结构</strong><br><strong>分层，模块化，宏内核，微内核，外核。</strong><br><strong>(五) 操作系统引导</strong><br><strong>(六) 虚拟机</strong></p>
+</blockquote>
+<p><img src="https://pic3.zhimg.com/80/v2-caea90d287792f8756db6add5daff1ce_720w.webp" alt="img"></p>
+<p>操作系统-2</p>
+<p><strong>二、进程管理</strong></p>
+<blockquote>
+<p><strong>(一) 进程与线程</strong><br><strong>1. 进程概念。</strong><br><strong>2. 进程的状态与转换。</strong><br><strong>3. 线程的实现内核支持的线程，线程库支持的线程。</strong><br><strong>4. 进程与线程的组织与控制5.进程间通信共享内存，消息传递，管道。</strong><br><strong>(二) CPU调度与上下文切换</strong><br><strong>1. 调度的基本概念</strong><br><strong>2. 调度的目标</strong><br><strong>3. 调度的实现调度器&#x2F;调度程序(scheduler)，</strong><br><strong>调度的时机与调度方式(抢占式&#x2F;非抢占式)，闲逛进程，内核级线程与用户级线程调度。</strong><br><strong>4. 典型调度算法</strong><br><strong>先来先服务调度算法; 短作业(短进程、短线程)优先调度算法; 时间片轮转调度算法; 优先级调度算法; 高响应比优先调度算法; 多级反馈列调度算法。</strong><br><strong>5. 上下文及其切换机制</strong><br><strong>(三) 同步与互斥</strong><br><strong>1. 进程同步的基本概念</strong><br><strong>2.实现临界区互斥的基本⽅法——软件实现方法; 硬件实现方法</strong><br><strong>3. 锁</strong><br><strong>4. 信号量</strong><br><strong>5. 条件变量</strong><br><strong>6. 经典同步问题</strong><br><strong>生产者-消费者问题; 读者-写者问题; 哲学家进餐问题。</strong><br><strong>(四) 死锁</strong><br><strong>1. 死锁的概念</strong><br><strong>2. 死锁预防</strong><br><strong>3. 死锁避免</strong><br><strong>4. 死锁检测和解除</strong></p>
+</blockquote>
+<p><img src="https://pic2.zhimg.com/80/v2-25b9a4c1db38c8e13c82cd22c34c8dd9_720w.webp" alt="img"></p>
+<p>操作系统-3</p>
+<p><img src="https://pic1.zhimg.com/80/v2-2d13b794911328c77c254b6ead6564c4_720w.webp" alt="img"></p>
+<p>操作系统-4</p>
+<p><strong>三、内存管理</strong></p>
+<blockquote>
+<p><strong>(一) 内存管理基础</strong><br><strong>1. 内存管理的基本概念</strong><br><strong>程序装入与链接; 逻辑地址与物理地址空间; 内存保护，内存分配与回收。</strong><br><strong>2. 连续分配管理方式</strong><br><strong>3. 分页管理方式</strong><br><strong>4. 分段管理方式</strong><br><strong>5. 段页式管理方式。</strong><br><strong>(二) 虚拟内存管理</strong><br><strong>1. 虚拟内存基本概念</strong><br><strong>2. 请求分页管理方式</strong><br><strong>3. 页框分配</strong><br><strong>4. 页面置换算法</strong><br><strong>最佳置换算法(OPT); 先进先出置换算法(FIFO); 最近最少使用置换算法(LRU); 时钟置换算法(CLOCK)。</strong><br><strong>5. 内存映射文件(Memory-Mapped Flies)</strong><br><strong>6. 虚拟存储器性能的影响因素及改进方法</strong></p>
+</blockquote>
+<p><img src="https://pic4.zhimg.com/80/v2-ebc90ab79c4ba13a262449aaa08ae26b_720w.webp" alt="img"></p>
+<p>操作系统-5</p>
+<p><strong>四、文件管理</strong></p>
+<blockquote>
+<p><strong>(一) 文件系统基础</strong><br><strong>1. 文件概念</strong><br><strong>2. 文件元数据和索引节点</strong><br><strong>3. 文件的操作建立，删除，打开，关闭，读，写。</strong><br><strong>4. 文件共享</strong><br><strong>5. 文件的逻辑结构</strong><br><strong>6. 文件的物理结构</strong><br><strong>(二) 目录</strong><br><strong>1. 目录的基本概念</strong><br><strong>2. 树形目录</strong><br><strong>3. 目录的操作</strong><br><strong>4. 硬链接与软链接</strong><br><strong>(三) 文件系统</strong><br><strong>1. 文件系统的全局结构(layout)</strong><br><strong>文件系统在外存中的结构，文件系统在内存中的结构。</strong><br><strong>2. 外存空闲空间管理方法</strong><br><strong>3. 虚拟文件系统</strong><br><strong>4. 文件系统挂载(mounting)</strong></p>
+</blockquote>
+<p><img src="https://pic1.zhimg.com/80/v2-b932844b8ee14c280edc7acb3f69cc20_720w.webp" alt="img"></p>
+<p>操作系统-6</p>
+<p><strong>五、输入输出(I&#x2F;O)管理</strong></p>
+<blockquote>
+<p><strong>(—) 1&#x2F;O管理基础</strong><br><strong>1. 设备</strong><br><strong>设备的基本概念，设备的分类，I&#x2F;O接口，I&#x2F;O端口。</strong><br><strong>2. I&#x2F;O控制方式</strong><br><strong>轮询方式，中断方式，DMA方式。</strong><br><strong>3. I&#x2F;O软件层次结构</strong><br><strong>中断处理程序，驱动程序，设备独立软件，用户层IV&#x2F;O软件。</strong><br><strong>4. 输入输出应用程序接口</strong><br><strong>字符设备接口，块设备接口，网络设备接口，阻塞&#x2F;非阻塞I&#x2F;O。</strong><br><strong>(二) 设备独立软件</strong><br><strong>1. 缓冲区管理</strong><br><strong>2. 设备分配与回收</strong><br><strong>3. 假脱机技术(SPOOLing)</strong><br><strong>4. 设备驱动程序接口</strong><br><strong>(三) 外存管理</strong><br><strong>1. 磁盘磁盘结构，格式化，分区，磁盘调度方法。</strong><br><strong>2. 固态硬盘读写性能特性，磨损均衡。</strong></p>
+</blockquote>
+<p><img src="https://pic1.zhimg.com/80/v2-94f09cf878ecd680380ae29b65c054f8_720w.webp" alt="img"></p>
+<p>操作系统-7</p>
+<hr>
+<h3 id="Part-4：计算机网络"><a href="#Part-4：计算机网络" class="headerlink" title="Part 4：计算机网络"></a>Part 4：计算机网络</h3><p><strong>【计算机网络】——【考查目标】</strong></p>
+<ul>
+<li><strong>1、掌握计算机网络的基本概念、基本原理和基本方法。</strong></li>
+<li><strong>2、掌握计算机网络的体系结构和典型网络协议，了解典型网络设备的组成和特点，理解典型网络设备的工作原理。</strong></li>
+<li><strong>3、能够运用计算机网络的基本概念、基本原理和基本方法进行网络系统的分析、设计和应用。</strong></li>
+</ul>
+<p><img src="https://pic2.zhimg.com/80/v2-379548a5d6f8cf4d4df44c8aa592dea9_720w.webp" alt="img"></p>
+<p>计算机网络-1</p>
+<p><strong>一、计算机网络体系结构</strong></p>
+<blockquote>
+<p><strong>(一) 计算机网络概述</strong><br><strong>1. 计算机网络的概念、组成与功能</strong><br><strong>2. 计算机网络的分类</strong><br><strong>3. 计算机网络主要性能指标</strong><br><strong>(二) 计算机网络体系结构与参考模型</strong><br><strong>1. 计算机网络分层结构</strong><br><strong>2. 计算机网络协议、接口、服务等概念</strong><br><strong>3. SO&#x2F;OSI参考模型和TCP&#x2F;IP模型</strong></p>
+</blockquote>
+<p><img src="https://pic3.zhimg.com/80/v2-d3912df2c3d978d43599f09041dd772e_720w.webp" alt="img"></p>
+<p>计算机网络-2</p>
+<p><strong>二、物理层</strong></p>
+<blockquote>
+<p><strong>(一) 通信基础</strong><br><strong>1. 信道、信号、宽带、码元、波特、速率、信源与信宿等基本概念</strong><br><strong>2. 奈奎斯特定理与香农定理</strong><br><strong>3. 编码与调制</strong><br><strong>4. 电路交换、报文交换与分组交换</strong><br><strong>5. 数据报与虚电路</strong><br><strong>(二) 传输介质</strong><br><strong>1. 双绞线、同轴电缆、光纤与无线传输介质</strong><br><strong>2. 物理层接口的特性</strong><br><strong>(三) 物理层设备</strong><br><strong>1. 中继器</strong><br><strong>2. 集线器</strong></p>
+</blockquote>
+<p><img src="https://pic1.zhimg.com/80/v2-8c882e13c5ea6d3dcee00ac977e1fd94_720w.webp" alt="img"></p>
+<p>计算机网络-3</p>
+<p><strong>三、数据链路层</strong></p>
+<blockquote>
+<p><strong>(一) 数据链路层的功能</strong><br><strong>(二) 组帧</strong><br><strong>(三) 差错控制</strong><br><strong>1. 检错编码</strong><br><strong>⒉纠错编码</strong><br><strong>(四) 流量控制与可靠传输机制</strong><br><strong>1. 流量控制、可靠传输与滑轮窗口机制</strong><br><strong>2. 停止-等待协议</strong><br><strong>3. 后退N帧协议(GBN)</strong><br><strong>4. 选择重传协议(SR)</strong><br><strong>(五) 介质访问控制</strong><br><strong>1. 信道划分</strong><br><strong>频分多路复用、时分多路复用、波分多路复用、码分多路复用的概念和基本原理。</strong><br><strong>2. 随即访问</strong><br><strong>ALOHA协议; CSMA协议; CSMA&#x2F;CD协议; CSMA&#x2F;CA协议。</strong><br><strong>3. 轮询访问</strong><br><strong>令牌传递协议</strong><br><strong>(六) 局域网</strong><br><strong>1. 局域网的基本概念与体系结构</strong><br><strong>2. 以太网与IEEE 802.3</strong><br><strong><a href="https://link.zhihu.com/?target=http://3.IEEE">3. IEEE</a> 802.11</strong><br><strong>4. VLAN基本概念与基本原理</strong><br><strong>(七) 广域网</strong><br><strong>1. 广域网的基本概念</strong><br><strong>2. PPP协议</strong></p>
+</blockquote>
+<p><img src="https://pic3.zhimg.com/80/v2-e0bda0647e599fc3d663581482476e8a_720w.webp" alt="img"></p>
+<p>计算机网络-4</p>
+<p><strong>四、网络层</strong></p>
+<blockquote>
+<p><strong>(—) 网络层的功能</strong><br><strong>1. 异构网络互联</strong><br><strong>2. 路由与转发</strong><br><strong>3. SDN基本概念</strong><br><strong>4. 拥塞控制</strong><br><strong>(二) 路由算法</strong><br><strong>1. 静态路由与动态路由</strong><br><strong>2. 距离-向量路由算法</strong><br><strong>3. 链路状态路由算法</strong><br><strong>4. 层次路由</strong><br><strong>(三) IPv4</strong><br><strong>1. lPv4分组</strong><br><strong>2. IPv4地址与NAT</strong><br><strong>3. 子网划分与子网掩码、CIDR</strong><br><strong>4. ARP协议、DHCP协议与ICMP协议</strong><br><strong>(四) IPv6</strong><br><strong>1. lPv6的主要特点</strong><br><strong>2. IPv6地址</strong><br><strong>(五) 路由协议</strong><br><strong>1. 自治系统</strong><br><strong>2. 域内路由与域间路由</strong><br><strong>3. RIP路由协议</strong><br><strong>4. OSPF路由协议</strong><br><strong>5. BGP路由协议</strong><br><strong>(六) IP组播</strong><br><strong>1. 组播的概念</strong><br><strong>2. IP组播地址</strong><br><strong>(七) 移动IP</strong><br><strong>1. 移动IP的概念</strong><br><strong>2. 移动IP的通信过程</strong><br><strong>(八) 网络层设备</strong><br><strong>1. 路由器的组成和功能</strong><br><strong>2. 路由表与路由转发</strong></p>
+</blockquote>
+<p><img src="https://pic2.zhimg.com/80/v2-5d550812fcbab59f73ff5925fa9d2eb1_720w.webp" alt="img"></p>
+<p>计算机网络-5</p>
+<p><strong>五、传输层</strong></p>
+<blockquote>
+<p><strong>(一) 传输层提供的服务</strong><br><strong>1. 传输层的功能</strong><br><strong>2. 传输层寻址与端口</strong><br><strong>3. 无连接服务与面向连接服务。</strong><br><strong>(二) UDP协议</strong><br><strong>1. UDP数据报</strong><br><strong>2. UDP校验</strong><br><strong>(三) TCP协议</strong><br><strong>1. TCP段</strong><br><strong>2. TCP连接管理</strong><br><strong>3. TCP可靠传输</strong><br><strong>4. TCP流量控制与拥塞控制</strong></p>
+</blockquote>
+<p><img src="https://pic2.zhimg.com/80/v2-7bf80ce45be183418c96618a0138a0c9_720w.webp" alt="img"></p>
+<p>计算机网络-6</p>
+<p><strong>六、应用层</strong></p>
+<blockquote>
+<p><strong>(一) 网络应用模型</strong><br><strong>1. 客户&#x2F;服务器模型</strong><br><strong>2. P2P模型</strong><br><strong>(二) DNS系统</strong><br><strong>1. 层次域名空间</strong><br><strong>2. 域名服务器</strong><br><strong>3. 域名解析过程</strong><br><strong>(三) FTP</strong><br><strong>1. FTP协议的工作原理</strong><br><strong>2. 控制连接与数据连接</strong><br><strong>(四) 电子邮件</strong><br><strong>1. 电子邮件系统的组成结构</strong><br><strong>2. 电子邮件格式与MIME</strong><br><strong>3. SMTP协议与POP3协议</strong><br><strong>(五) Www</strong><br><strong>1. WWW的概念与组成结构</strong><br><strong>2. HTTP协议</strong></p>
+</blockquote>
+<p><img src="https://pic3.zhimg.com/80/v2-80d80926188171f5f831bccbf0f38466_720w.webp" alt="img"></p>
+<p>计算机网络-7</p>
+
+        
+    </section>
+</article>
+
+
+
+<div class="comments">
+    <div id="comments"></div>
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+    new Gitalk({
+        clientID: "7fbe80427f54741e289f",
+        clientSecret: "f34ed5fd92e54c9000bd37ba951948cb939deff5",
+        repo: "icode-wild-cat.github.io",
+        owner: "sanonz",
+        admin: ["sanonz"],
+        id: "e7ce55496a701aa0cd1882511a664917",
+        distractionFreeMode: true,
+        title: "408大纲",
+        body: "http://example.com/2023/03/13/408%E5%A4%A7%E7%BA%B2/",
+        labels: ["408大纲"]
+    }).render('comments');
+    </script>
+</div>
+
+
+
+            </div>
+        </div>
+
+        
+            
+            <a id="pagenext" href="/2023/03/12/%E5%BD%B1%E9%9B%86/%E5%BD%B1%E9%9B%86/" class="article-next" title="DodgeWildCat&#39;s photograph album"><i class="icon-arrow-right"></i></a>
+            
+            
+        
+
+        <footer class="footer">
+    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, Theme by <a href="https://github.com/sanonz/hexo-theme-concise" target="_blank">Concise</a>
+
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?e4027971a230b210f4671f485b33846a";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    
+</footer>
+
+    </main>
+
+    <script type="text/javascript" src="https://unpkg.com/jquery@1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        var nodes = {
+            nav: $('#nav'),
+            aside: $('#aside'),
+            asideInner: $('#aside-inner'),
+            navInner: $('#nav-inner')
+        };
+
+        var doing = false;
+        nodes.asideInner.on('webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', function() {
+            if (nodes.aside.hasClass('mobile-open')) {
+                nodes.aside.removeClass('mobile-open');
+            } else {
+                nodes.aside.removeClass('mobile-close panel-show');
+            }
+            doing = false;
+        });
+        $('#open-panel, #aside-mask').on('click', function() {
+            if (doing) {
+                return;
+            }
+
+            if (nodes.aside.hasClass('panel-show')) {
+                nodes.aside.addClass('mobile-close');
+            } else {
+                nodes.aside.addClass('mobile-open panel-show');
+            }
+        });
+        $('#open-menus').on('click', function() {
+            nodes.navInner.slideToggle('normal', slideDone);
+        });
+
+        if (window.innerWidth <= 960) {
+            setTimeout(function() {
+                nodes.navInner.slideUp('normal', slideDone);
+            }, 3000);
+        }
+
+        function slideDone() {
+            if (nodes.navInner.css('display') !== 'none') {
+                nodes.navInner.css('display', '');
+            }
+        }
+
+        $(window).on('resize', function() {
+            if ($(this).width() > 960) {
+                nodes.navInner.css('display', '');
+            }
+        });
+    });
+    </script>
+    
+        
+<script src="/js/scrollspy.min.js"></script>
+
+        <script type="text/javascript">
+        $(document.body).scrollspy({target: '#aside-inner'});
+
+        $(window).on('resize', function() {
+            var hw = $('#header').width();
+            var ww = $('#wrapper').width();
+            var space = ($(this).width() - hw - ww) / 2 / 2;
+
+            var pageprev = $('#pageprev');
+            var pagenext = $('#pagenext');
+            var avg = (pageprev.width() + pagenext.width()) / 2
+
+            if(space > avg) {
+                var len = space - avg / 2;
+                var styles = {position: 'fixed', top: '50%', marginTop: - (pageprev.width() + pagenext.width()) / 4}
+                pageprev.css($.extend({left: hw + len}, styles));
+                pagenext.css($.extend({right: len}, styles));
+            } else {
+                pageprev.removeAttr('style');
+                pagenext.removeAttr('style');
+            }
+        }).trigger('resize');
+        </script>
+    
+
+</body>
+</html>
