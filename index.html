@@ -187,7 +187,174 @@
     
     <section class="article-body markdown-body">
         
-        
+        <h2 id="1-Named-convention"><a href="#1-Named-convention" class="headerlink" title="1. Named convention"></a>1. Named convention</h2><h3 id="1-1-function-name"><a href="#1-1-function-name" class="headerlink" title="1.1 function name"></a>1.1 function name</h3><ol>
+<li>All lowercase</li>
+<li>Use underscore ( _ ) in between the words</li>
+</ol>
+<p>e.g. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span>  <span class="title function_">my_function</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;This is one function that i create first&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-variable-name"><a href="#1-2-variable-name" class="headerlink" title="1.2 variable name"></a>1.2 variable name</h3><ol>
+<li>Only start  variable name with an alphabet that can be lowercase and uppercase or underscore ( _ ) </li>
+<li>Only contain A-Z,a-z,0-9 and underscore ( _ )</li>
+<li>Case sensitive. e.g. str and Str are two different variables</li>
+<li>Don’t use reserve kyeword as a variable name for example keywords like <code>class</code>, <code>for</code>, <code>def</code>, <code>del</code>, <code>is</code>, <code>else</code>, <code>try</code>, <code>from</code>, etc.</li>
+</ol>
+<p>e.g.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Allowed variable names</span></span><br><span class="line"></span><br><span class="line">x = <span class="number">2</span></span><br><span class="line">y = <span class="string">&quot;hello&quot;</span></span><br><span class="line">myname = <span class="string">&quot;python&quot;</span></span><br><span class="line">my_name = <span class="string">&quot;python&quot;</span></span><br><span class="line">_my_name = <span class="string">&quot;python&quot;</span></span><br><span class="line">_myname = <span class="string">&quot;python&quot;</span></span><br><span class="line">MYNAME = <span class="string">&quot;python&quot;</span></span><br><span class="line">myName = <span class="string">&quot;python&quot;</span></span><br><span class="line">myName7 = <span class="string">&quot;python&quot;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Disallowed variable name</span></span><br><span class="line">7myname = <span class="string">&quot;python&quot;</span></span><br><span class="line">-myname = <span class="string">&quot;python&quot;</span></span><br><span class="line">myname@li = <span class="string">&quot;python&quot;</span></span><br><span class="line">my name = <span class="string">&quot;python&quot;</span></span><br><span class="line"><span class="keyword">for</span> = <span class="string">&quot;python&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># it show invalid syntax</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3-class-name"><a href="#1-3-class-name" class="headerlink" title="1.3 class name"></a>1.3 class name</h3><p>Python naming convention for classes are the same as any other programming language like C#, Java and C++,etc.</p>
+<ol>
+<li>Need to follow  the camelCase convention</li>
+<li>End with “Error” when writing any classes for an exception </li>
+<li>Can give a class name like a function to call the class from somewhere or callable</li>
+<li>Bulitin class be lowercase</li>
+</ol>
+<h3 id="1-4-file-name"><a href="#1-4-file-name" class="headerlink" title="1.4 file name"></a>1.4 file name</h3><ol>
+<li>Should choose a short name as file name</li>
+<li>All lowercase</li>
+<li>Can also use underscore ( _ ) with the file name</li>
+</ol>
+<h3 id="1-5-method-name"><a href="#1-5-method-name" class="headerlink" title="1.5 method name"></a>1.5 method name</h3><ol>
+<li>All lowercase</li>
+<li>Separate by an  underscore( _ ) when there are multiple words in this method name</li>
+<li>Non-public method name start with an underscore( _ )</li>
+<li>Start with two undercase( _ ) when wanna alter a method mame</li>
+</ol>
+<h3 id="1-6-constant-name"><a href="#1-6-constant-name" class="headerlink" title="1.6 constant name"></a>1.6 constant name</h3><ol>
+<li>All uppercase</li>
+<li>Separated by an underscore( _ ) when there are multiple words in this constant name</li>
+</ol>
+<h3 id="1-7-package-name"><a href="#1-7-package-name" class="headerlink" title="1.7 package name"></a>1.7 package name</h3><ol>
+<li>All lowercase</li>
+<li>Separated by an underscore( _ ) when there are multiple words in this package name</li>
+<li>best to use one word as package name</li>
+</ol>
+<h3 id="1-8-object-name"><a href="#1-8-object-name" class="headerlink" title="1.8 object  name"></a>1.8 object  name</h3><ol>
+<li>All lowercase</li>
+<li>choose a very stort name</li>
+<li>Separated by an underscore( _ ) when there are multiple words in this object name</li>
+</ol>
+<h3 id="1-9-module-name"><a href="#1-9-module-name" class="headerlink" title="1.9 module name"></a>1.9 module name</h3><ol>
+<li>All lowercase</li>
+<li>Separated by an underscore( _ ) when there are multiple words in this module name</li>
+<li>best to use one word as module</li>
+</ol>
+<h3 id="1-10Global-variable-name"><a href="#1-10Global-variable-name" class="headerlink" title="1.10Global variable name"></a>1.10Global variable name</h3><ol>
+<li>All lowercase</li>
+<li>Separated by an underscore( _ ) when there are multiple words in this globle variable name</li>
+</ol>
+<h3 id="Snake-case-naming"><a href="#Snake-case-naming" class="headerlink" title="Snake_case naming"></a>Snake_case naming</h3><p>Snake_case naming is Separated by an underscore( _ ) when there are multiple words in this module name</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">my_name</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-11-Arguments-of-method"><a href="#1-11-Arguments-of-method" class="headerlink" title="1.11 Arguments of method"></a>1.11 Arguments of method</h3><ol>
+<li>Use argument named ‘self’ as their first argument in case of Instance methods</li>
+<li>For class methods, use ‘cls’ as their first argument</li>
+</ol>
+<h3 id="General-naming-conventions"><a href="#General-naming-conventions" class="headerlink" title="General naming conventions"></a>General naming conventions</h3><ol>
+<li>Always give a meaning full name for any of the python objects. Don’t give a name like x,y, or z, etc</li>
+<li>Don’t give space in between object name instead of using <strong>underscore(_)</strong> when there are more than one-word presents.</li>
+<li>Better to use camelCase only when it makes sense or else try avoiding more use of camelCase.</li>
+</ol>
+<h2 id="2-Print"><a href="#2-Print" class="headerlink" title="2. Print"></a>2. Print</h2><h3 id="2-1-Print-without-newline"><a href="#2-1-Print-without-newline" class="headerlink" title="2.1 Print without newline"></a>2.1 Print without newline</h3><p>Offer one extra argument “end” so that it appends at the end of the line</p>
+<p>e.g.</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Hello Tom&quot;</span>, end = <span class="string">&quot;.&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;How are you&quot;</span>)</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line">Hello Tom.How are you</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-Print-with-newline"><a href="#2-2-Print-with-newline" class="headerlink" title="2.2 Print with newline"></a>2.2 Print with newline</h3><p>newline is automatically gets printed at the end of the line.</p>
+<p>e.g. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Hi,Tom.&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;How are you?&quot;</span>)</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line">Hi,Tom.</span><br><span class="line">How are you?</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-Print-blank-line"><a href="#2-3-Print-blank-line" class="headerlink" title="2.3 Print blank line"></a>2.3 Print blank line</h3><ol>
+<li><p>The print without any arguments will give a blank line, it will be without any character.</p>
+</li>
+<li><p>And print(‘’) alse get it</p>
+</li>
+</ol>
+<p>e.g.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Hi&quot;</span>)</span><br><span class="line"><span class="comment"># Here, printy() get one blank line</span></span><br><span class="line"><span class="built_in">print</span>()</span><br><span class="line"><span class="comment"># and print(&#x27;&#x27;) alse get it</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;How are you&quot;</span>)</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line">Hi</span><br><span class="line"></span><br><span class="line">How are you</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>Print with chat argument that contain ‘\n’</li>
+</ol>
+<p>e.g.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Tom\n&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;How are you&quot;</span>)</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line">Tom</span><br><span class="line"></span><br><span class="line">How are you</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-Print-str-and-int-on-the-same-line"><a href="#2-4-Print-str-and-int-on-the-same-line" class="headerlink" title="2.4 Print str and int on the same line"></a>2.4 Print str and int on the same line</h3><p>to print string and int on the same line means that we want to concatenate int with string and this can be done by using the <strong>str()</strong> method.</p>
+<p>e.g.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">value = <span class="number">18</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;I am &quot;</span> + <span class="built_in">str</span>(value))</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line">I am <span class="number">18</span></span><br></pre></td></tr></table></figure>
+
+<p>Here, the <strong>+operator</strong> is used to concatenate the string with int and <strong>str()</strong> is used for conversion.</p>
+<h3 id="2-5-Create-a-new-line"><a href="#2-5-Create-a-new-line" class="headerlink" title="2.5 Create a new line"></a>2.5 Create a new line</h3><p>to create a new line we will use <strong>“\n”</strong> this means that current line ends at this point and the new line starts after ” \n “.</p>
+<p>e.g.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;hello\npython&quot;</span>)</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line">hello</span><br><span class="line">python</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-Reserve-Keywords"><a href="#3-Reserve-Keywords" class="headerlink" title="3. Reserve Keywords"></a>3. Reserve Keywords</h2><p>Keywords are reserved words that cannot be used as a variable name, identifier, or any function name. </p>
+<p>List of Keywords</p>
+<table>
+    <tr>
+        <td>class</td><td>del</td><td>def</td><td>False</td>
+    </tr>
+    <tr>
+        <td>True</td><td>break</td><td>continue</td><td>if</td>
+    </tr><tr>
+        <td>else</td><td>return</td><td>import</td><td>lambda</td>
+    </tr>
+    <tr>
+        <td>none</td><td>try</td><td>pass</td><td>in</td>
+    </tr>
+</table>
+
+<h3 id="3-1-class"><a href="#3-1-class" class="headerlink" title="3.1 class"></a>3.1 class</h3><p><strong>class keyword</strong> is used to create a class and a class is like a user defined objects.</p>
+<p>e.g.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Student</span>:</span><br><span class="line">    name = <span class="string">&quot;Jack&quot;</span></span><br><span class="line">    roll = <span class="number">21</span></span><br><span class="line">    </span><br><span class="line"><span class="built_in">print</span>(Student.name)</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line">Jack</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-del"><a href="#3-2-del" class="headerlink" title="3.2 del"></a>3.2 del</h3><p><strong>del keyword</strong> is used to delete the particular item from the list or variable etc.</p>
+<p>e.g.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">value = [<span class="string">&quot;A&quot;</span>, <span class="string">&quot;B&quot;</span>]</span><br><span class="line"><span class="keyword">del</span> value[<span class="number">0</span>]</span><br><span class="line"><span class="built_in">print</span>(value)</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line">[<span class="string">&#x27;B&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3-def"><a href="#3-3-def" class="headerlink" title="3.3 def"></a>3.3 def</h3><p><strong>def keyword</strong> is used to create a new user defined function.</p>
+<p>e.g.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">function1</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Welcome to function in py&quot;</span>)</span><br><span class="line">function1()</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line">Welcome to function <span class="keyword">in</span> py</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-4-False"><a href="#3-4-False" class="headerlink" title="3.4 False"></a>3.4 False</h3><p><strong>false keyword</strong> is the boolean value and false keyword is also represented as zero which means nothing.</p>
+<p>e.g.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="number">0</span>&gt;<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line"><span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-5-Ture"><a href="#3-5-Ture" class="headerlink" title="3.5 Ture"></a>3.5 Ture</h3><p><strong>true keyword</strong> is the boolean value and true keyword is represented as one.</p>
+<p>e.g.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="number">0</span>&lt;<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-6-break"><a href="#3-6-break" class="headerlink" title="3.6  break"></a>3.6  break</h3><p><strong>break keyword</strong> is used to terminate the current iteration of the loop.</p>
+<p>e.g.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> value <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>):</span><br><span class="line">    <span class="keyword">if</span> value &gt; <span class="number">2</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    <span class="built_in">print</span>(value)</span><br><span class="line">    </span><br><span class="line">&gt;&gt;</span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-7-contine"><a href="#3-7-contine" class="headerlink" title="3.7 contine"></a>3.7 contine</h3><p><strong>continue keyword</strong> is used to end the current iteration of for loop and continue on with the next iteration</p>
+<p>e.g.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> value <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):</span><br><span class="line">    <span class="keyword">if</span> value ==  <span class="number">3</span>:</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    <span class="built_in">print</span>(value)</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">4</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-8-if"><a href="#3-8-if" class="headerlink" title="3.8 if"></a>3.8 if</h3><p><strong>if keyword</strong> is used to define the conditional statement and it executes the block of code if the condition is true.</p>
+<p>e.g.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">value = <span class="number">4</span></span><br><span class="line"><span class="keyword">if</span> value &gt; <span class="number">2</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;value is bigger than 2&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-9-else"><a href="#3-9-else" class="headerlink" title="3.9 else"></a>3.9 else</h3><p><strong>else keyword</strong> is used as a conditional statements it decide what to do if the condition is false.</p>
+<p>e.g.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">value = <span class="number">4</span></span><br><span class="line"><span class="keyword">if</span> value &gt; <span class="number">2</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;value is bigger than 2&quot;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;value is smaller than 2&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-10-return"><a href="#3-10-return" class="headerlink" title="3.10 return"></a>3.10 return</h3><p><strong>return keyword</strong> is used to return the value from the calling function.</p>
+<p>e.g.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">my_func</span>():</span><br><span class="line">	<span class="keyword">return</span> <span class="number">5</span> + <span class="number">7</span></span><br><span class="line"><span class="built_in">print</span>(my_func())</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-11-import"><a href="#3-11-import" class="headerlink" title="3.11 import"></a>3.11 import</h3><p><strong>import keyword</strong> is used to import modules that you need to use </p>
+<p>e.g.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line">a = datetime.now()</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line"><span class="number">2023</span>-05-03 <span class="number">20</span>:<span class="number">31</span>:<span class="number">20.843793</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-12-lambda"><a href="#3-12-lambda" class="headerlink" title="3.12 lambda"></a>3.12 lambda</h3><p><strong>lambda keyword</strong> can take（接受） any number of arguments but only one expression and it creates a small anonymous function(匿名函数).</p>
+<p>e.g.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="keyword">lambda</span> x : x + <span class="number">20</span></span><br><span class="line"><span class="built_in">print</span>(s(<span class="number">5</span>))</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line"><span class="number">25</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-13-None"><a href="#3-13-None" class="headerlink" title="3.13 None"></a>3.13 None</h3>
         
     </section>
 </article>
