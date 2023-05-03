@@ -56,6 +56,10 @@
                 <span class="nav-text">首页</span>
             </a>
         
+            <a class="nav-item" href="/categories/language">
+                <span class="nav-text">语言</span>
+            </a>
+        
             <a class="nav-item" href="/categories/mech">
                 <span class="nav-text">机械</span>
             </a>
@@ -155,6 +159,60 @@
         <div id="content" class="content">
             <div id="wrapper" class="wrapper" style="max-width: 800px">
                 
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2023/03/11/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80%E5%92%8C%E5%8E%9F%E7%90%86/">数据库基础和原理</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <a class="article-date" href="http://example.com/page/2/index.html">
+    
+    <i class="icon-calendar vm"></i>
+    
+    <time class="vm" datetime="2023-03-11T15:41:15.486Z" itemprop="datePublished">2023-03-11</time>
+</a>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <p>该内容为复习数据库时记录，所属标签包含（数据库原理）、SQL语言、SQL数据库（MySQL）、NoSQL数据库（Redis、MongoDB、ElasticSearch），叙述基于参考博客2。</p>
+<p><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1Kg7UUpO3wwALX6x28cWA7A#list/path=%2F%E5%B0%9A%E7%A1%85%E8%B0%B7Java%E5%AD%A6%E7%A7%91%E5%85%A8%E5%A5%97%E6%95%99%E7%A8%8B%EF%BC%88%E6%80%BB207.77GB%EF%BC%89%2F1.%E5%B0%9A%E7%A1%85%E8%B0%B7%E5%85%A8%E5%A5%97JAVA%E6%95%99%E7%A8%8B--%E5%9F%BA%E7%A1%80%E5%BF%85%E5%A4%87%EF%BC%8867.32GB%EF%BC%89%2F%E5%B0%9A%E7%A1%85%E8%B0%B7MySQL%E5%85%A5%E9%97%A8%E5%88%B0%E9%AB%98%E7%BA%A7-%E5%AE%8B%E7%BA%A2%E5%BA%B7%E7%89%88&parentPath=%2F">参考教程1</a> <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1Kg7UUpO3wwALX6x28cWA7A#list/path=%2F%E5%B0%9A%E7%A1%85%E8%B0%B7Java%E5%AD%A6%E7%A7%91%E5%85%A8%E5%A5%97%E6%95%99%E7%A8%8B%EF%BC%88%E6%80%BB207.77GB%EF%BC%89%2F1.%E5%B0%9A%E7%A1%85%E8%B0%B7%E5%85%A8%E5%A5%97JAVA%E6%95%99%E7%A8%8B--%E5%9F%BA%E7%A1%80%E5%BF%85%E5%A4%87%EF%BC%8867.32GB%EF%BC%89%2FMySQL%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF&parentPath=%2F">参考教程2</a> <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1Kg7UUpO3wwALX6x28cWA7A#list/path=%2F%E5%B0%9A%E7%A1%85%E8%B0%B7Java%E5%AD%A6%E7%A7%91%E5%85%A8%E5%A5%97%E6%95%99%E7%A8%8B%EF%BC%88%E6%80%BB207.77GB%EF%BC%89%2F1.%E5%B0%9A%E7%A1%85%E8%B0%B7%E5%85%A8%E5%A5%97JAVA%E6%95%99%E7%A8%8B--%E5%9F%BA%E7%A1%80%E5%BF%85%E5%A4%87%EF%BC%8867.32GB%EF%BC%89%2FMySQL%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF&parentPath=%2F">参考教程3 </a> <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1Kg7UUpO3wwALX6x28cWA7A#list/path=%2F%E5%B0%9A%E7%A1%85%E8%B0%B7Java%E5%AD%A6%E7%A7%91%E5%85%A8%E5%A5%97%E6%95%99%E7%A8%8B%EF%BC%88%E6%80%BB207.77GB%EF%BC%89%2F1.%E5%B0%9A%E7%A1%85%E8%B0%B7%E5%85%A8%E5%A5%97JAVA%E6%95%99%E7%A8%8B--%E5%9F%BA%E7%A1%80%E5%BF%85%E5%A4%87%EF%BC%8867.32GB%EF%BC%89%2FMySQL%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF&parentPath=%2F">参考教程4</a> </p>
+<p>[参考博客1](<a target="_blank" rel="noopener" href="https://www.pdai.tech/md/db/sql/sql-db-howitworks.html">SQL DB - 关系型数据库是如何工作的 | Java 全栈知识体系 (pdai.tech)</a>) [参考博客2](<a target="_blank" rel="noopener" href="https://javaguide.cn/database/basis.html">数据库基础知识总结 | JavaGuide(Java面试+学习指南)</a>)</p>
+        
+        <p class="article-more-link">
+            <a href="/2023/03/11/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80%E5%92%8C%E5%8E%9F%E7%90%86/#more">
+                <span class="vm">阅读更多</span>
+                <i class="icon-arrow-double-right vm"></i>    
+            </a>
+        </p>
+        
+        
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <section class="article-body markdown-body">
+        
+        
+        
+    </section>
+</article>
+
+
     <article class="article" itemscope itemprop="blogPost">
     
     <header class="article-header">
@@ -472,59 +530,10 @@
 </article>
 
 
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2023/03/05/JWT/">JWT解读与使用</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <a class="article-date" href="http://example.com/page/2/index.html">
-    
-    <i class="icon-calendar vm"></i>
-    
-    <time class="vm" datetime="2023-03-05T13:34:46.347Z" itemprop="datePublished">2023-03-05</time>
-</a>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/JWT/" rel="tag">JWT</a>
-</div>
-
-
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        
-        <p>JWT（JSON web Token）目前最流行的跨域身份验证解决方案</p>
-<ul>
-<li>流行</li>
-<li>安全</li>
-<li>稳定</li>
-<li>易用</li>
-<li>支持JSON</li>
-</ul>
-        
-        <p class="article-more-link">
-            <a href="/2023/03/05/JWT/#more">
-                <span class="vm">阅读更多</span>
-                <i class="icon-arrow-double-right vm"></i>    
-            </a>
-        </p>
-        
-        
-    </section>
-</article>
-
-
 
 
 <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
 </nav>
 
 
