@@ -164,6 +164,197 @@
     <header class="article-header">
         
         <h1 itemprop="name">
+            <a href="/2023/05/03/py/np/">np</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <a class="article-date" href="http://example.com/index.html">
+    
+    <i class="icon-calendar vm"></i>
+    
+    <time class="vm" datetime="2023-05-03T14:44:18.951Z" itemprop="datePublished">2023-05-03</time>
+</a>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/py/" rel="tag">py</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <span id="more"></span>
+
+<h1 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h1><h2 id="1-Create-Array-in-Numpy"><a href="#1-Create-Array-in-Numpy" class="headerlink" title="1. Create Array in Numpy"></a>1. Create Array in Numpy</h2><p><strong>NumPy</strong> offers many functions for creating arrays in Python with initial placeholder content(具有初始占位符内容的数组). Also, it minimizes the necessity of growing arrays, which is an expensive operation(最大限度地减少了增长阵列的必要性，而增长阵列是一项昂贵的操作). For example <em><strong>&#x3D;&#x3D;NumPy.empty&#x3D;&#x3D;</strong></em>, <em><strong>&#x3D;&#x3D;NumPy.zeros&#x3D;&#x3D;</strong></em> methods we can use to create arrays in Python using NumPy, etc.</p>
+<h3 id="np-empty"><a href="#np-empty" class="headerlink" title="np.empty()"></a>np.empty()</h3><p><strong>np.empty()</strong> method is used to <strong>create an uninitialized array</strong> of the specified arrays of specified shapes and data types. It contains junk values.</p>
+<p>e.g.</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="comment"># shape=(2,2)--2x2</span></span><br><span class="line">my_arr = np.empty((<span class="number">2</span>,<span class="number">2</span>),dtype=<span class="built_in">int</span>)</span><br><span class="line"><span class="built_in">print</span>(my_arr)</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line">[[ <span class="number">842077711</span> -<span class="number">164081441</span>]</span><br><span class="line"> [-<span class="number">200226173</span> -<span class="number">447417374</span>]]</span><br></pre></td></tr></table></figure>
+
+<h3 id="np-zeros"><a href="#np-zeros" class="headerlink" title="np.zeros()"></a>np.zeros()</h3><p><strong>numpy.zeros()</strong> is used to <strong>create the NumPy array with the specified shape</strong> where each NumPy array item is initialized to 0.</p>
+<p>e.g.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="comment"># shape=(3,3)--3x3</span></span><br><span class="line">my_arr = np.zeros((<span class="number">3</span>,<span class="number">3</span>),dtype=<span class="built_in">int</span>)</span><br><span class="line"><span class="built_in">print</span>(my_arr)</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line">[[<span class="number">0</span> <span class="number">0</span> <span class="number">0</span>]</span><br><span class="line"> [<span class="number">0</span> <span class="number">0</span> <span class="number">0</span>]</span><br><span class="line"> [<span class="number">0</span> <span class="number">0</span> <span class="number">0</span>]]</span><br></pre></td></tr></table></figure>
+
+<h3 id="np-ones"><a href="#np-ones" class="headerlink" title="np.ones()"></a>np.ones()</h3><p><strong>np.ones()</strong> is used to create the NumPy array with the specified shape where each NumPy array item is initialized to 1.</p>
+<p>e.g.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="comment"># shape=(3,3)--3x3</span></span><br><span class="line">my_arr = np.ones((<span class="number">3</span>,<span class="number">3</span>),dtype=<span class="built_in">int</span>)</span><br><span class="line"><span class="built_in">print</span>(my_arr)</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line">[[<span class="number">1</span> <span class="number">1</span> <span class="number">1</span>]</span><br><span class="line"> [<span class="number">1</span> <span class="number">1</span> <span class="number">1</span>]</span><br><span class="line"> [<span class="number">1</span> <span class="number">1</span> <span class="number">1</span>]]</span><br></pre></td></tr></table></figure>
+
+<h3 id="np-reshape"><a href="#np-reshape" class="headerlink" title="np.reshape()"></a>np.reshape()</h3><p><strong>numPy.reshape()</strong> method is used to shape an array without changing data of array</p>
+<p>e.g.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">arr1 = np.arange(<span class="number">6</span>)</span><br><span class="line"><span class="built_in">print</span>(arr1)</span><br><span class="line">&gt;&gt;</span><br><span class="line">[<span class="number">0</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span>]</span><br><span class="line"></span><br><span class="line">arr2 = arr1.reshape</span><br><span class="line"><span class="built_in">print</span>(my_arr)</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line">[[<span class="number">0</span> <span class="number">1</span> <span class="number">2</span>]</span><br><span class="line"> [<span class="number">3</span> <span class="number">4</span> <span class="number">5</span>]]</span><br></pre></td></tr></table></figure>
+
+<h3 id="various-np-array-functions"><a href="#various-np-array-functions" class="headerlink" title="various np array functions"></a>various np array functions</h3><h4 id="np-array"><a href="#np-array" class="headerlink" title="np.array()"></a>np.array()</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">my_arr = np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line"><span class="built_in">print</span>(my_arr)</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line">[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+
+<h4 id="size-attributes"><a href="#size-attributes" class="headerlink" title="size attributes"></a>size attributes</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(my_arr.size)</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line"><span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-Create-ndarray-in-np"><a href="#2-Create-ndarray-in-np" class="headerlink" title="2. Create ndarray in np"></a>2. Create ndarray in np</h2><p><strong>Numpy</strong> is used to work with array, the array object in numpy is called ndarray.</p>
+<p>e.g.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">my_arr = np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(my_arr))</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line">&lt;<span class="keyword">class</span> <span class="string">&#x27;numpy.ndarray&#x27;</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="array-dimensions"><a href="#array-dimensions" class="headerlink" title="array dimensions"></a>array dimensions</h3><p>A dimension is a direction in which you can vary the specification of an array’s elements. Dimension in an array is one level of array depth. Let us see a few examples of <strong>python numpy array dimensions</strong>.</p>
+<h4 id="0-D-arrays"><a href="#0-D-arrays" class="headerlink" title="0-D arrays"></a>0-D arrays</h4><ul>
+<li>The <strong>0-D arrays</strong> in Numpy are scalar(标量) and they cannot be accessed via indexing（不能通过索引下标访问）.</li>
+<li>Firstly we will <strong>import numpy as np</strong>.</li>
+<li>The <strong>0-D arrays</strong> are the elements in an array. Also, each value in an array is a 0-D array（单单一个元素）.</li>
+</ul>
+<p>e.g.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">my_arr = np.array(<span class="number">50</span>)</span><br><span class="line"><span class="built_in">print</span>(my_arr)</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line"><span class="number">50</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="1-D-arrays"><a href="#1-D-arrays" class="headerlink" title="1-D arrays"></a>1-D arrays</h4><ul>
+<li><strong>1-D arrays</strong> in numpy are one dimension that can be thought of a list where you can access the elements with the help of indexing.</li>
+<li>Firstly we will <strong>import numpy as np</strong>.</li>
+<li>The array which has 0-D arrays as its elements is called 1-D arrays（0维数组的数组）.</li>
+</ul>
+<p>e.g.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">my_arr = np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>])</span><br><span class="line"><span class="built_in">print</span>(my_arr)</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line">[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span>]</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-D-arrays"><a href="#2-D-arrays" class="headerlink" title="2-D arrays"></a>2-D arrays</h4><ul>
+<li><strong>2-D arrays</strong> in numpy are two dimensions array that can be distinguished based on the number of square brackets used(根据方括号的数量区分).</li>
+<li>Firstly we will <strong>import numpy as np</strong>.</li>
+<li>The array which has 1-D arrays as its elements is called 2-D arrays（1维数组的数组）.</li>
+</ul>
+<p>e.g.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">my_arr = np.array([[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]])</span><br><span class="line"><span class="built_in">print</span>(my_arr)</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line">[[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]</span><br><span class="line"> [<span class="number">4</span> <span class="number">5</span> <span class="number">6</span>]]</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-D-arrays"><a href="#3-D-arrays" class="headerlink" title="3-D arrays"></a>3-D arrays</h4><ul>
+<li>The <strong>3-D arrays</strong> in numpy are the three-dimension array that can have three square brackets with the numpy array（三个方括号）.</li>
+<li>Firstly we will <strong>import numpy as np</strong>.</li>
+<li>The array which has 2-D arrays as its elements is called 3-D arrays（2维数组的数组）.</li>
+</ul>
+<p>e.g.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">my_arr = np.array([[[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]],[[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]]])</span><br><span class="line"><span class="built_in">print</span>(my_arr)</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line">[[[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]</span><br><span class="line">  [<span class="number">4</span> <span class="number">5</span> <span class="number">6</span>]]</span><br><span class="line"></span><br><span class="line"> [[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]</span><br><span class="line">  [<span class="number">4</span> <span class="number">5</span> <span class="number">6</span>]]]</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-Difference-between-np-array-and-py-list"><a href="#3-Difference-between-np-array-and-py-list" class="headerlink" title="3. Difference between np array and py list"></a>3. Difference between np array and py list</h2><table>
+<thead>
+<tr>
+<th>np array</th>
+<th>py list</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>faster and more compact</td>
+<td>not much faster and compact</td>
+</tr>
+<tr>
+<td>can store only one data type in an array at any time</td>
+<td>able to store different data types in the same list</td>
+</tr>
+<tr>
+<td>gives an enormous range of fast and efficient ways of creating arrays and manipulating numerical data inside them.</td>
+<td>python lists can contain different data types within a single list.</td>
+</tr>
+</tbody></table>
+<h1 id="Matrix"><a href="#Matrix" class="headerlink" title="Matrix"></a>Matrix</h1><ul>
+<li>Matrix is a rectangular arrangement(矩形排列) of data, in other words, we can say that it is a rectangular numpy array（矩形的np array） of data the horizontal values in the matrix are called rows and the vertical entries are called columns.</li>
+<li>In Python, we can implement（实现） this matrix using nested lists(使用嵌套list) or numpy arrays or using a class called a matrix in the numpy library.</li>
+<li>First, we will discuss arrays and matrix because this comes under the numpy library.</li>
+<li>Numpy is a library that allows us to create multi-dimensional arrays.</li>
+<li>Two Dimensional array means the collection of homogenous data in lists of a lis（list的list）t. It is also known as a numpy matrix. In a 2Dimension array, we can easily use two square brackets that is why it said lists of lists.</li>
+</ul>
+<h2 id="Syntax（语法）"><a href="#Syntax（语法）" class="headerlink" title="Syntax（语法）"></a>Syntax（语法）</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.matrix(data,dtype=<span class="literal">None</span>)</span><br></pre></td></tr></table></figure>
+
+<p>e.g.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">a = np.array([<span class="number">1</span>,<span class="number">2</span>])</span><br><span class="line">b = np.array([<span class="number">3</span>,<span class="number">4</span>])</span><br><span class="line">new_matrix = np.matrix([[<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">4</span>]])</span><br><span class="line"><span class="built_in">print</span>(new_matrix)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(new_matrix))</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line"></span><br><span class="line">[[<span class="number">1</span> <span class="number">2</span>]</span><br><span class="line"> [<span class="number">3</span> <span class="number">4</span>]]</span><br><span class="line">&lt;<span class="keyword">class</span> <span class="string">&#x27;numpy.matrix&#x27;</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="matrix-multiplication（矩阵乘法）"><a href="#matrix-multiplication（矩阵乘法）" class="headerlink" title="matrix multiplication（矩阵乘法）"></a><span id="jump">matrix multiplication（矩阵乘法）</span></h2><ul>
+<li>Matrix is a rectangular arrangement of data or number or in other words, we can say that it is a rectangular array of data the horizontal entries in the matrix are called rows and the vertical entries are called columns.</li>
+<li>Matrix multiplication and array multiplication are different for array multiplication we use this symbol that is the multiplication symbol but to perform the matrix multiplication we need to use a method called dot(点).（array乘法直接用‘x’符号，矩阵乘法就要调用dot方法）</li>
+<li>To perform the matrix multiplication we need to use the dot method.</li>
+<li>It is an operation that takes two matrices as input and produces a single matrix.（输入两个矩阵，输出一个矩阵）</li>
+</ul>
+<p>Syntax:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">np.dot(a,b,out=<span class="literal">None</span>)</span><br><span class="line"><span class="number">1.</span> a: array_like(It <span class="keyword">is</span> a first arggument)</span><br><span class="line"><span class="number">2.</span> b: array_like(It <span class="keyword">is</span> a second argument)</span><br><span class="line"><span class="number">3.</span> out: output argument.Must have the exact value that would be returned <span class="keyword">if</span> it was <span class="keyword">not</span> used. In particular, it must have the right data <span class="built_in">type</span>, it must be contiguous, <span class="keyword">and</span> its dtype must be <span class="keyword">in</span> a data <span class="built_in">type</span> that would be returned <span class="keyword">for</span> dotmatrix(a,b).</span><br></pre></td></tr></table></figure>
+
+<p>e.g.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">matrix1 = np.matrix([[<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">4</span>]])</span><br><span class="line">matrix2 = np.matrix([[<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">4</span>]])</span><br><span class="line">matrix_multi = matrix1.dot(matrix2)</span><br><span class="line"><span class="built_in">print</span>(matrix_multi)</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line">[[ <span class="number">7</span> <span class="number">10</span>]</span><br><span class="line"> [<span class="number">15</span> <span class="number">22</span>]]</span><br></pre></td></tr></table></figure>
+
+<h2 id="matrix-operations"><a href="#matrix-operations" class="headerlink" title="matrix  operations"></a>matrix  operations</h2><ul>
+<li>Matrix is a rectangular arrangement of data or numbers or in other words, we can say that it is a rectangular numpy array of data the horizontal values in the given matrix are called rows, and the vertical values are called columns.</li>
+<li>We discuss the three operations that are &#x3D;&#x3D;<em><strong>addition（加）</strong></em>&#x3D;&#x3D;, <em><strong>&#x3D;&#x3D;multiplication(乘)&#x3D;&#x3D;</strong></em>, and <em><strong>&#x3D;&#x3D;subtraction（减）&#x3D;&#x3D;</strong></em>.</li>
+<li>For matrix addition, we will use symbol plus so if A is an array and B is another array we can easily add this matrix a+b. it is similar to the other addition it will perform the value by value addition.</li>
+<li>Matrix multiplication and array multiplication are different for array multiplication we use this symbol that is the multiplication symbol but to obtain the matrix multiplication we need to use a method called dot matrix.</li>
+<li>For matrix subtraction, we will use numpy.subtract() to subtract values of two matrices. it returns the subtraction of matrix 1 and matrix 2, value-wise.</li>
+<li>Numpy is a library that allows us to create multi-dimensional arrays.</li>
+</ul>
+<p>e.g.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">matrix1 = np.matrix([[<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">4</span>]])</span><br><span class="line">matrix2 = np.matrix([[<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">4</span>]])</span><br><span class="line"></span><br><span class="line"><span class="comment"># addition of matrix</span></span><br><span class="line">add_matrix = np.add(matrix1,matrix2)</span><br><span class="line"><span class="built_in">print</span>(add_matrix)</span><br><span class="line"></span><br><span class="line"><span class="comment"># subtraction of matrix</span></span><br><span class="line">sub_matrix = np.subtract(matrix1,matrix2)</span><br><span class="line"><span class="built_in">print</span>(sub_matrix)</span><br><span class="line"></span><br><span class="line"><span class="comment"># multiplication of matrix</span></span><br><span class="line">mult_matrix = matrix1.dot(matrix2)</span><br><span class="line"><span class="built_in">print</span>(mult_matrix)</span><br><span class="line"></span><br><span class="line"><span class="comment"># division of matrix </span></span><br><span class="line">div_matrix = np.divide(matrix1,matrix2)</span><br><span class="line"><span class="built_in">print</span>(div_matrix)</span><br></pre></td></tr></table></figure>
+
+<h2 id="matrix-inverse-矩阵求逆"><a href="#matrix-inverse-矩阵求逆" class="headerlink" title="matrix inverse(矩阵求逆)"></a>matrix inverse(矩阵求逆)</h2><ul>
+<li><p>Matrix is a rectangular arrangement of data or numbers or in other words, we can say that it is a rectangular array of data the horizontal entries in the matrix are called rows and the vertical entries are called columns.</p>
+</li>
+<li><p>For matrix inverse method, we need to use <em><strong>&#x3D;&#x3D;np.linalg.inv()&#x3D;&#x3D;</strong></em> function.</p>
+</li>
+</ul>
+<p>e.g.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">matrix1 = np.matrix([[<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">4</span>]])</span><br><span class="line"><span class="built_in">print</span>(matrix1)</span><br><span class="line"><span class="comment"># matrix inverse(矩阵求逆)</span></span><br><span class="line">inverse_matrix = np.linalg.inv(matrix1)</span><br><span class="line"><span class="built_in">print</span>(inverse_matrix)</span><br></pre></td></tr></table></figure>
+
+<h2 id="matrix-transpose-转置"><a href="#matrix-transpose-转置" class="headerlink" title="matrix transpose(转置)"></a>matrix transpose(转置)</h2><p><em><strong>&#x3D;&#x3D;np.transpose()&#x3D;&#x3D;</strong></em></p>
+<p>Syntax：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.transpose(arr,axis=<span class="literal">None</span>)</span><br></pre></td></tr></table></figure>
+
+<p>e.g.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">matrix1 = np.matrix([[<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">4</span>]])</span><br><span class="line"><span class="built_in">print</span>(matrix1)</span><br><span class="line">transpose_matrix = np.transpose(matrix1)</span><br><span class="line"><span class="built_in">print</span>(transpose_matrix)</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line">[[<span class="number">1</span> <span class="number">2</span>]</span><br><span class="line"> [<span class="number">3</span> <span class="number">4</span>]]</span><br><span class="line">[[<span class="number">1</span> <span class="number">3</span>]</span><br><span class="line"> [<span class="number">2</span> <span class="number">4</span>]]</span><br></pre></td></tr></table></figure>
+
+<h2 id="matrix-power-矩阵方幂"><a href="#matrix-power-矩阵方幂" class="headerlink" title="matrix power(矩阵方幂)"></a>matrix power(矩阵方幂)</h2><ul>
+<li><p><em><strong>&#x3D;&#x3D;np.linalg.matrix_power()&#x3D;&#x3D;</strong></em></p>
+</li>
+<li><p>It consists of two parameters array and power(n).</p>
+</li>
+<li><p>If you take n&#x3D;0 then we will easily get Identify matrix(单位矩阵).</p>
+</li>
+<li><p>If you take n&gt;0 then it’s for positive values.</p>
+</li>
+<li><p>If n is negative then the inverse is generated and then raise to the absolute value n.</p>
+</li>
+</ul>
+<p>Syntax:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.linalg.matrix_power(arr,power_n)</span><br></pre></td></tr></table></figure>
+
+<p>e.g.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">matrix1 = np.matrix([[<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">4</span>]])</span><br><span class="line"><span class="built_in">print</span>(matrix1)</span><br><span class="line"><span class="comment"># matrix power</span></span><br><span class="line">power_matrix = np.linalg.matrix_power(matrix1,<span class="number">2</span>)</span><br><span class="line"><span class="built_in">print</span>(power_matrix)</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line">[[<span class="number">1</span> <span class="number">2</span>]</span><br><span class="line"> [<span class="number">3</span> <span class="number">4</span>]]</span><br><span class="line">[[ <span class="number">7</span> <span class="number">10</span>]</span><br><span class="line"> [<span class="number">15</span> <span class="number">22</span>]]</span><br></pre></td></tr></table></figure>
+
+<h2 id="matrix-size"><a href="#matrix-size" class="headerlink" title="matrix  size"></a>matrix  size</h2><ul>
+<li>It represents the number of elements(元素的个数) in the array.</li>
+<li>For matrix size, we need to use <em><strong>&#x3D;&#x3D;numpy.size()&#x3D;&#x3D;</strong></em> function.</li>
+</ul>
+<p>e.g.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">matrix1 = np.matrix([[<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">4</span>]])</span><br><span class="line"><span class="built_in">print</span>(matrix1)</span><br><span class="line"><span class="comment"># matrix size</span></span><br><span class="line">size_matrix = np.size(matrix1)</span><br><span class="line"><span class="built_in">print</span>(size_matrix)</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line">[[<span class="number">1</span> <span class="number">2</span>]</span><br><span class="line"> [<span class="number">3</span> <span class="number">4</span>]]</span><br><span class="line"><span class="number">4</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="matrix-multiplication-element-wise"><a href="#matrix-multiplication-element-wise" class="headerlink" title="matrix multiplication element-wise"></a>matrix multiplication element-wise</h2><p>同<a href="#jump">matrix multiplication</a></p>
+
+        
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
             <a href="/2023/05/03/py/py/">py</a>
         </h1>
         
@@ -187,7 +378,9 @@
     
     <section class="article-body markdown-body">
         
-        <h2 id="01-Named-convention"><a href="#01-Named-convention" class="headerlink" title="01. Named convention"></a>01. Named convention</h2><h3 id="1-1-function-name"><a href="#1-1-function-name" class="headerlink" title="1.1 function name"></a>1.1 function name</h3><ol>
+        <span id="more"></span>
+
+<h2 id="01-Named-convention"><a href="#01-Named-convention" class="headerlink" title="01. Named convention"></a>01. Named convention</h2><h3 id="1-1-function-name"><a href="#1-1-function-name" class="headerlink" title="1.1 function name"></a>1.1 function name</h3><ol>
 <li>All lowercase</li>
 <li>Use underscore ( _ ) in between the words</li>
 </ol>
@@ -728,16 +921,6 @@
                 <i class="icon-arrow-double-right vm"></i>    
             </a>
         </p>
-        
-        
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <section class="article-body markdown-body">
-        
         
         
     </section>
